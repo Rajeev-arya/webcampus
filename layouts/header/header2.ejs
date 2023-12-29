@@ -1,0 +1,49 @@
+  <header class="py-3">
+    <h1 class="text-center"><%= metadata?.collegename %></h1>
+    <h3 class="text-center"><%= metadata?.collegedata?.tagline %></h3>
+  </header>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <button class="navbar-toggler ps-2 pe-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse sm-color" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <% if (metadata && metadata.navigationbar && metadata.navigationbar.length > 0) { %>
+                <% metadata.navigationbar.forEach((item) => { 
+                      if(item.itemtype && item.itemtype == 'dropdown'){ %>
+                      <li class="nav-item mx-2 dropdown">
+                          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <%= item.text %>
+                          </a>
+                          <ul class="dropdown-menu mt-2 rounded-0 border border-dark" aria-labelledby="navbarDropdown">
+                              <% if(item.dropdown && item.dropdown.length > 0){ %>
+                                <% item.dropdown.forEach((nesteditem) => {  %>
+                                      
+                              <li><a class="dropdown-item" href="/<%= item.href %>/<%= nesteditem.href %>"><%= nesteditem.text %></a></li>
+
+                              <% }) %>
+                            <% } %>
+                          </ul>
+                      </li>
+                      
+                      <% }else{ %>
+                          <li class="nav-item mx-2">
+                            <% if(item.href == 'gallery'){ %>
+                              <a class="nav-link" aria-current="page" href="/gallery"><%= item.text %></a>
+                          </li>
+                          <% } else if (item.href == 'home'){  %>
+                            <a class="nav-link" aria-current="page" href="/"><%= item.text %></a>
+                          <% }else{  %>
+                            <a class="nav-link" aria-current="page" href="/<%= item.href %>"><%= item.text %></a>
+                          <% } %>
+                      <% } %>
+
+                <% }); %>
+            <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>

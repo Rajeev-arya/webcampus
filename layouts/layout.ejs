@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Web Campus</title>
+
+        <!-- Latest compiled and minified CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Fa awesome CDN -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Custom Stylesheet -->
+        <link rel="stylesheet" href="/assets/css/style.css">
+
+        <link rel="stylesheet" href="/assets/css/eclairs.css">
+
+        <!-- OWL theme -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+        <!-- Owl carousel CDN -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <style id="dynamic-styles">
+            /* // Update the variable value dynamically */
+            :root {
+                --text-dark: <%= metadata?.themecolor?.textdark %>;
+                --bg-dark: <%= metadata?.themecolor?.bgdark %>;
+                --main-color: <%= metadata?.themecolor?.main %>;
+                --text-light: <%= metadata?.themecolor?.textlight %>;
+                --bg-light: <%= metadata?.themecolor?.bglight %>;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+        <%- include('./header/header2.ejs') %>
+        <%- body %>
+        <%- include('./footer/footer2.ejs')  %>
+
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" ></script>
+        <script src="/assets/js/owl-plugin.js"></script>
+</body>
+</html>

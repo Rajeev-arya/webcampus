@@ -1,0 +1,354 @@
+<!-- Content wrapper -->
+<div class="content-wrapper">
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <h4 class="py-3 mb-3">Widget</h4>
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Upload Carousel Image -->
+                <div class="card mb-4">
+                  <div class="card-header p-0">
+                    <div class="nav-align-top">
+                      <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                          <button
+                            type="button"
+                            class="nav-link active"
+                            role="tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#images"
+                            aria-controls="images"
+                            aria-selected="true">
+                            Images
+                          </button>
+                        </li>
+
+                        <li class="nav-item">
+                          <button
+                            type="button"
+                            class="nav-link"
+                            role="tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#slider"
+                            aria-controls="slider"
+                            aria-selected="true">
+                            Slider
+                          </button>
+                        </li>
+
+                        <li class="nav-item">
+                          <button
+                            type="button"
+                            class="nav-link"
+                            role="tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#mainpage"
+                            aria-controls="mainpage"
+                            aria-selected="true">
+                            Main Page Gallery
+                          </button>
+                        </li>
+                        
+                        <% if(data && data.foldertype && data.foldertype.length > 0){ %>
+                          <% data.foldertype.forEach((item)=>{ %>
+                        <li class="nav-item">
+                          <button
+                            type="button"
+                            class="nav-link"
+                            role="tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#<%= item.path %>"
+                            aria-controls="<%= item.path %>"
+                            aria-selected="false">
+                            <%= item.name %>
+                          </button>
+                        </li>
+                          <% }) } %>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="tab-content p-0">
+
+                      <div class="tab-pane fade show active" id="images" role="tabpanel">
+                        <h3 class="mt-2">Images</h3>
+                        
+                        <div class="row">
+                          <div class="col-md-2">
+                            <div class="card bg-dark">
+                              <% if (data.logo) { %>
+                                  <img class="card-img-top" src="/images/official/<%=data.logo %>" alt="Card image" width="100%">
+                              <% }else{ %>
+                                  <img class="card-img-top" src="/images/extras/user.jpg" alt="Card image" width="100%">
+                              <% } %>
+                              <div class="card-body">
+                                <h5 class="card-title text-white">Logo</h5>
+                                <form action="/manager/upload-logo" method="post" enctype="multipart/form-data">
+                                  <div class="mb-3">
+                                    
+                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" />
+                                    <div class="d-flex justify-content-center">
+                                      <button type="submit" class="btn btn-sm btn-primary mt-3">Upload</button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-2">
+                            <div class="card bg-dark">
+                              
+                              <% if (data.principal) { %>
+                                  <img class="card-img-top" src="/images/official/<%=data.principal %>" alt="Card image" width="100%">
+                              <% }else{ %>
+                                  <img class="card-img-top" src="/images/extras/user.jpg" alt="Card image" width="100%">
+                              <% } %>
+
+                              <div class="card-body">
+                                <h5 class="card-title text-white">Principal</h5>
+                                <form action="/manager/upload-principal" method="post" enctype="multipart/form-data">
+                                  <div class="mb-3">
+                                    
+                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" />
+                                    <div class="d-flex justify-content-center">
+                                      <button type="submit" class="btn btn-sm btn-primary mt-3">Upload</button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-2">
+                            <div class="card bg-dark">
+                              <% if (data.director) { %>
+                                  <img class="card-img-top" src="/images/official/<%=data.director %>" alt="Card image" width="100%">
+                              <% }else{ %>
+                                  <img class="card-img-top" src="/images/extras/user.jpg" alt="Card image" width="100%">
+                              <% } %>
+                              <div class="card-body">
+                                <h5 class="card-title text-white">Director</h5>
+                                <form action="/manager/upload-director" method="post" enctype="multipart/form-data">
+                                  <div class="mb-3">
+                                    
+                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" />
+                                    <div class="d-flex justify-content-center">
+                                      <button type="submit" class="btn btn-sm btn-primary mt-3">Upload</button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-2">
+                            <div class="card bg-dark">
+                              <% if (data.secretary) { %>
+                                  <img class="card-img-top" src="/images/official/<%=data.secretary %>" alt="Card image" width="100%">
+                              <% }else{ %>
+                                  <img class="card-img-top" src="/images/extras/user.jpg" alt="Card image" width="100%">
+                              <% } %>
+                              <div class="card-body">
+                                <h5 class="card-title text-white">Secretary</h5>
+                                <form action="/manager/upload-secretary" method="post" enctype="multipart/form-data">
+                                  <div class="mb-3">
+                                    
+                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" />
+                                    <div class="d-flex justify-content-center">
+                                      <button type="submit" class="btn btn-sm btn-primary mt-3">Upload</button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-2">
+                            <div class="card bg-dark">
+                              <% if (data.incharge) { %>
+                                  <img class="card-img-top" src="/images/official/<%=data.incharge %>" alt="Card image" width="100%">
+                              <% }else{ %>
+                                  <img class="card-img-top" src="/images/extras/user.jpg" alt="Card image" width="100%">
+                              <% } %>
+                              <div class="card-body">
+                                <h5 class="card-title text-white">Admsn Incharge</h5>
+                                <form action="/manager/upload-incharge" method="post" enctype="multipart/form-data">
+                                  <div class="mb-3">
+                                    
+                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" />
+                                    <div class="d-flex justify-content-center">
+                                      <button type="submit" class="btn btn-sm btn-primary mt-3">Upload</button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="tab-pane fade show" id="slider" role="tabpanel">
+                        <h3 class="mt-2 mb-0">Slider</h3>
+                        <div class="row">
+                          <% if (data && data.image && data.image.length > 0) { %>
+                            <% data.image.forEach(function(item) { %>
+                              <% if (item.foldername == 'slider') { %>
+                          <div class="col-md-6 mt-3">
+                            <div class="card p-3">
+                              <img src="/images/gallery/<%=item.newimagename %>" alt="Slider">
+                              <div class="d-flex justify-content-between align-items-center mt-2 ">  
+                                <p class="mb-0">Image Name: <%=item.newimagename %></p>
+                                <a href="/manager/delete-image/<%=item._id %>" class="btn btn-sm btn-danger">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                              <% } %>
+                            <% }); %>
+                            <% } %>
+                        </div>
+                      </div>
+                      
+                      <div class="tab-pane fade show" id="mainpage" role="tabpanel">
+                        <h3 class="mt-2 mb-0">Main Page Gallery Section</h3>
+                        <p class="mb-0">Note: Only first four image will only be visible on the page.</p>
+                        <div class="row">
+                          <% if (data && data.image && data.image.length > 0) { %>
+                            <% data.image.forEach(function(item) { %>
+                              <% if (item.foldername == 'mainpage') { %>
+                          <div class="col-md-3 mt-3">
+                            <div class="card p-3">
+                              <img src="/images/gallery/<%=item.newimagename %>" alt="Slider">
+                              <div class="d-flex justify-content-between align-items-center mt-2 ">  
+                                <p class="mb-0">Image Name: <%=item.newimagename %></p>
+                                <a href="/manager/delete-image/<%=item._id %>" class="btn btn-sm btn-danger">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                              <% } %>
+                            <% }); %>
+                            <% } %>
+                        </div>
+                      </div>
+                      
+                      <% if(data && data.foldertype && data.foldertype.length > 0){ %>
+                        <% data.foldertype.forEach((item)=>{ %>
+                      
+                      <div class="tab-pane fade" id="<%= item.path %>" role="tabpanel">
+                        <h3 class="mt-2 mb-0"><%= item.name %></h3>
+                        <div class="row">
+                          <% if (data && data.image && data.image.length > 0) { %>
+                            <% data.image.forEach(function(nesteditem) { %>
+                              <% if (nesteditem.foldername == item.path ) { %>
+                          <div class="col-md-4 mt-3">
+                            <div class="card p-3">
+                              <img src="/images/gallery/<%=nesteditem.newimagename %>" alt="Slider">
+
+
+                              <div class="d-flex justify-content-between align-items-center mt-2 ">  
+                                <p class="mb-0">Image Name: <%=nesteditem.newimagename %></p>
+                                <a href="/manager/delete-image/<%=item._id %>"  class="btn btn-round btn-sm btn-danger">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                              <% } %>
+                            <% }); %>
+
+                            <% } %>
+                        </div>
+                      </div>
+                        <% }) } %>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            
+            <div class="col-md-12">
+              <!-- Upload Carousel Image -->
+                  <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between">
+                      
+                      <h5>Image Upload</h5>
+                      <button type="button" class="btn btn-primary waves-effect waves-light float-right" data-bs-toggle="modal" data-bs-target="#smallModal">
+                        New Folder
+                      </button>
+                    </div>
+                      <div class="card-body">
+                          <div class="row">
+                              <form action="/manager/upload-image" method="post" enctype="multipart/form-data">
+                                      
+                                  <div class="col-md-12">
+                                    <div class="mb-3">
+                                        
+                                        <input class="form-control" type="file" id="formFile" name="slider" accept="image/*" />
+                                    </div>
+                                    <div class="mb-3">
+                                    <div class="form-floating form-floating-outline mb-4">
+                                      <select class="form-select" name="foldername" id="exampleFormControlSelect1" aria-label="Default select example">
+
+                                        <option selected disabled>Select --</option>
+                                        <option value="slider" class="text-uppercase">slider</option>
+                                        <option value="mainpage" class="text-uppercase">Main Page</option>
+                                        <% if(data && data.foldertype && data.foldertype.length > 0){ %>
+                                        <% data.foldertype.forEach((item)=>{ %>
+                                          <option value="<%= item.path %>" class="text-uppercase"><%= item.name %></option>
+                                        <% }) } %>
+                                      </select>
+                                      <label for="exampleFormControlSelect1">Select Folder</label>
+                                    </div>
+                                    </div>
+                                  </div>
+                                  <div class="d-flex justify-content-center">
+                                      <button type="submit" class="btn btn-primary">Submit</button>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+            </div>
+            
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <form action="/manager/add-image-type" method="post">
+          
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel2">Add Folder</h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col mb-4 mt-2">
+              <div class="form-floating form-floating-outline">
+                <input type="text" id="nameSmall" class="form-control" placeholder="slider" name="imagename" />
+                <label for="nameSmall">Folder Name</label>
+              </div>
+              <div class="form-floating form-floating-outline mt-3">
+                <input type="text" id="nameSmall" class="form-control" placeholder="slider (no space)" name="imagepath" />
+                <label for="nameSmall">Folder Path</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

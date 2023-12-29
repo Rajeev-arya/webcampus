@@ -1,0 +1,172 @@
+<!-- Content wrapper -->
+<div class="content-wrapper">
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <h4 class="py-3 mb-3">Widget</h4>
+
+            <div class="col-md-12">
+                    <!-- Form controls -->
+                        <div class="card mb-4">
+                            <h5 class="card-header">Navigation Bar</h5>
+                            <div class="card-body">
+                                <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                                    <div class="container-fluid">
+                                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                      </button>
+                                      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                                        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+                                            <% if (data && data.navigationbar && data.navigationbar.length > 0) { %>
+                                                  <% data.navigationbar.forEach((item) => { 
+                                                        if(item.itemtype && item.itemtype == 'dropdown'){ %>
+                                                        <li class="nav-item ms-3 dropdown">
+                                                            <a class="nav-link bg-info rounded-pill px-3 dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <%= item.text %>
+                                                            </a>
+                                                            
+                                                            <ul class="dropdown-menu mt-2 rounded-0 border border-dark" aria-labelledby="navbarDropdown">
+                                                                <% if(item.dropdown && item.dropdown.length > 0){ %>
+                                                                  <% item.dropdown.forEach((nesteditem) => {  %>
+                                                                        <div class="d-flex justify-content-between align-items-center">
+                                                                          
+                                                                <li style="width: 80%;"><a class="dropdown-item" href="#"><%= nesteditem.text %></a></li>
+
+                                                              <li class="nav-item mx-1"><a href="/manager/delete-navsubitem/<%= item._id %>/<%= nesteditem._id %>"><i class="fa fa-remove text-danger"></i></a></li>
+                                                                        </div>
+                                                                <% }) %>
+                                                              <% } %>
+                                                              <li class="nav-item mx-3 mt-1 mb-2 d-flex align-items-center">
+                                                                <button type="button" class="dropdown-item btn btn-sm btn-primary px-2" data-bs-toggle="modal" data-bs-target="#s<%= item._id %>"> Add New </button>
+                                                              </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="nav-item mx-1"><a href="/manager/delete-navitem/<%= item._id %>"><i class="fa fa-remove text-danger"></i></a></li>
+                                                        
+                                                        <!-- nav Sub item -->
+                                                        <div class="modal fade" id="s<%= item._id %>" tabindex="-1" aria-hidden="true">
+                                                          <div class="modal-dialog  modal-dialog-centered modal-sm" role="document">
+                                                            <div class="modal-content">
+                                                              <form action="/manager/add-nav-sublink/<%= item._id %>" method="post">
+                                                                  
+                                                              <div class="modal-header">
+                                                                <h4 class="modal-title" id="exampleModalLabel2">New nav item</h4>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                              </div>
+                                                              <div class="modal-body">
+                                                                <div class="row">
+                                                                  <div class="col-md-12 mb-4 mt-2">
+                                                                    <div class="form-floating form-floating-outline">
+                                                                      <input type="text" id="itemname" name="itemname" class="form-control" placeholder="Nav item" />
+                                                                      <label for="itemname">Name</label>
+                                                                    </div>
+                                                                  </div>
+                                                                  <div class="col-md-12 mb-3">
+                                                                      <div class="form-floating form-floating-outline">
+                                                                        <input type="text" id="link" name="link" class="form-control" placeholder="Nav link" />
+                                                                        <label for="link">Link</label>
+                                                                      </div>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                              <div class="modal-footer">
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                                  Close
+                                                                </button>
+                                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                                              </div>
+                                                              </form>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+
+                                                        <% }else{ %>
+                                                            <li class="nav-item ms-3">
+                                                                <a class="nav-link bg-info rounded-pill px-3 active" aria-current="page" href="#"><%= item.text %></a>
+                                                            </li>
+                                                            
+                                                            <li class="nav-item mx-1">
+                                                              <a href="/manager/delete-navitem/<%= item._id %>"><i class="fa fa-remove text-danger"></i></a>
+                                                            </li>
+                                                        <% } %>
+
+                                                  <% }); %>
+                                              <% } %>
+                                          <li class="nav-item mx-3 d-flex align-items-center">
+                                            <button
+                                                type="button"
+                                                class="btn btn-sm btn-primary px-2"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#smallModal">
+                                                Add New
+                                            </button>
+                                            
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </nav>
+
+
+                            </div>
+                        </div>
+            </div>
+            
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+                      <!-- Main nav item -->
+                      <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog  modal-dialog-centered modal-sm" role="document">
+                          <div class="modal-content">
+                            <form action="/manager/add-navigation" method="post">
+                                    
+                                <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel2">New nav item</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12 mb-4 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" id="itemname" name="itemname" class="form-control" placeholder="Nav item" />
+                                        <label for="itemname">Name</label>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-floating form-floating-outline">
+                                        <input type="text" id="link" name="link" class="form-control" placeholder="Nav link" />
+                                        <label for="link">Link</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-check  mb-3 d-flex ps-0">
+                                        <label class="form-check-label pe-5" for="itemtype"> Is Dropdown: </label>
+                                        <input class="form-check-input" type="checkbox" value="dropdown" id="itemtype" name="itemtype" />
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>

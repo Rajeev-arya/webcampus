@@ -1,0 +1,52 @@
+<div class="main-footer">
+    
+<div class="container">
+    <footer class="pt-5">
+      <div class="row">
+
+        <% if (metadata && metadata.footer && metadata.footer.length > 0) { %>
+          <% metadata.footer.forEach((item) => { 
+                if(item.itemtype && item.itemtype == 'dropdown'){ %>
+                  
+        <div class="col-6 col-md-2 mb-3">
+          <h5><u><%= item.text %></u></h5>
+          <ul class="nav footer-item flex-column">
+            
+            <% if(item.dropdown && item.dropdown.length > 0){ %>
+              <% item.dropdown.forEach((nesteditem) => {  %>
+            <li class="nav-item mb-2"><a href="<%= nesteditem.href %>" class="nav-link p-0"><%= nesteditem.text %></a></li>
+
+            <% }) %>
+            <% } %>
+          </ul>
+        </div>
+      
+      <% }else{ %>
+          <li class="nav-item mx-2">
+            <a class="nav-link active" aria-current="page" ><%= item.text %></a>
+          </li>
+      <% } %>
+
+          <% }); %>
+      <% } %>
+  
+  
+        <div class="col-md-4 mb-3">
+            <h5>Contact Details</h5>
+            <div class="mb-2"><strong><%= metadata?.collegename %></strong></div>
+            <div class="mb-2"><i class="fa fa-phone"></i> +91 <%= metadata?.collegedata?.phone1 %></div>
+            <div class="mb-2"><i class="fa fa-phone"></i> +91 <%= metadata?.collegedata?.phone2 %></div>
+            <div class="mb-2"><i class="fa fa-envelope"></i> <%= metadata?.collegedata?.email1 %></div>
+            <div class="mb-2"><i class="fa fa-map-marker"></i> <%= metadata?.collegedata?.address %></div>
+        </div>
+      </div>
+  
+      <div class="d-flex flex-column flex-sm-row justify-content-center py-4 mt-4 border-top">
+        <p class="mt-4">&copy; 2024 <strong><%= metadata?.collegename %></strong>, Inc. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+</div>
+
+  
+  

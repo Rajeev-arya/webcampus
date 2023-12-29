@@ -1,0 +1,264 @@
+<div class="slider p-2">
+
+    <div class="owl-carousel owl-theme">
+        
+        <% if (slider && slider.image && slider.image.length > 0) { %>
+            <% slider.image.forEach(function(item) { %>
+              <% if (item.foldername == 'slider') { %>
+                <div class="item">
+                    <div class="image-box">
+                        <div class="image">
+                        <img src="/images/gallery/<%=item.newimagename %>" alt="Slider">
+                        </div>
+                    </div>
+                </div>
+              <% } %>
+            <% }); %>
+            <% } %>
+    </div>
+</div>
+
+<div class="marquee container">
+    <div class="marquee-content">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus consectetur ratione magni quibusdam quia fugiat
+        sequi illo assumenda, consequuntur harum.
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="row mt-4">
+        <div class="col-md-5 mb-3">
+            <div class="notice-section">
+                <div class="header p-2">
+                    <h3 class="mb-0 p-1"><i class="fa fa-file-text-o px-3"></i>Notice & Updates</h3>
+                </div>
+                <div class="body p-3">
+                    
+                    <% if (homedata && homedata.notice && homedata.notice.content && homedata.notice.content.length > 0) { %>
+                        <% homedata.notice.content.forEach(function(item) { %>
+                            
+                            <div class="notice-content d-flex flex-start p-1">
+                                <div class="date px-3 py-2">
+                                    <h4 class="mb-0 pt-1">05</h4>
+                                    <h6 class="mb-0">JUN</h6>
+                                </div>
+                                <div class="content px-3">
+                                    <div>
+                                        <p class="mb-0"><%= item.caption %></p>
+                                        <a href="/images/notices/<%= item.filepath %>" download="" class="btn btn-sm btn-info btn-round">Download</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 mb-3">
+            <div class="important-link-section">
+                <div class="header p-2">
+                    <h3 class="mb-0 p-1"><i class="fa fa-database px-3"></i>Important Links</h3>
+                </div>
+                <div class="body">
+
+                    <div class="row">
+                        <% if (homedata && homedata.importantlink && homedata.importantlink.content && homedata.importantlink.content.length > 0) { %>
+                            <% homedata.importantlink.content.forEach(function(item) { %>
+                                <div class="col-md-3">
+                                    <center>
+                                        <a href="<%= item.href %>">
+                                            <div class="tab px-3 mx-2">
+                                                <div class="icon p-3">
+                                                    <i class="fa <%= item.faicon %> fa-3x"></i>
+                                                </div>
+                                                <h6 class="text-center py-2"><%= item.heading %></h6>
+                                            </div>
+                                        </a>
+                                    </center>
+                                </div>
+                            <% }); %>
+                        <% } %>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="principal-desk container pb-4">
+    <div class="header p-2">
+        <h3 class="text-center p-3"><strong><u><%= homedata?.principaldesk?.caption %></u></strong></h3>
+    </div>
+    <div class="body">
+
+        <div class="col-md-10 offset-md-1">
+            <div class="row ">
+                                <% if (slider.principal) { %>
+                <div class="col-md-3 d-flex justify-content-center pb-4">
+                    <div class="principal-image">
+                        <div class="image">
+                            <center>
+                                    <img class="card-img-top" src="/images/official/<%=slider.principal %>" alt="Card image" width="100%">
+                            </center>
+                            <h5 class="text-center pt-3">Prof. Indrajit Prasad Roy</h5>
+                            <h6 class="text-center">Principal</h6>
+
+                        </div>
+                    </div>
+                </div>
+                                <% } %>
+
+                <div class="col-md-8">
+                    <div class="px-4">
+                        <p style="text-align: justify;">
+                            <%= homedata?.principaldesk?.content %>
+                        </p>
+                        <h5 style="text-align: right;">Best wishes,</h5>
+                        <h6 style="text-align: right;">Principal</h6>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="row mt-4">
+        <div class="col-md-7 mb-3">
+            <div class="">
+                <div class="bb p-2">
+                    <h3 class="mb-0 ps-4 p-1"><i class="fa fa-university px-3"></i><%= homedata?.aboutcollege?.caption %></h3>
+                </div>
+                <div class="body px-5 pt-2 pb-4">
+                    <p style="letter-spacing: 0.75px;margin-bottom: 0;"><%= homedata?.aboutcollege?.content %></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 mb-3">
+            <div class="notice-section">
+                <div class="header p-2">
+                    <h3 class="mb-0 p-1"><i class="fa fa-calendar px-3"></i>New & Events</h3>
+                </div>
+                <div class="body p-3">
+                    
+                    <% if (homedata && homedata.news && homedata.news.content && homedata.news.content.length > 0) { %>
+                        <% homedata.news.content.forEach(function(item) { %>
+                            
+                            <div class="notice-content d-flex flex-start p-1">
+                                <div class="date px-3 py-2">
+                                    <h4 class="mb-0 pt-1">05</h4>
+                                    <h6 class="mb-0">JUN</h6>
+                                </div>
+                                <div class="content px-3">
+                                    <div>
+                                        <p class="mb-0"><%= item.caption %></p>
+                                        <a href="/images/news/<%= item.filepath %>" download="" class="btn btn-sm btn-info btn-round">Download</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="important-personality container">
+    <div class="col-md-10 offset-md-1">
+      <div class="mt-4 py-3 px-5">
+        <div class="row">
+            
+            <% if (slider.secretary) { %>
+          <div class="col-md-4">
+            <img class="p-4 pb-2" src="/images/official/<%=slider.secretary %>" width="100%" alt="">
+            <h4 class="text-center">Secretary</h4>
+          </div>
+            <% } %>
+
+            <% if (slider.director) { %>
+          <div class="col-md-4">
+            <img class="p-4 pb-2" src="/images/official/<%=slider.director %>" width="100%" alt="">
+            <h4 class="text-center">Director</h4>
+          </div>
+          <% } %>
+          
+          <% if (slider.incharge) { %>
+          <div class="col-md-4">
+            <img class="p-4 pb-2" src="/images/official/<%=slider.incharge %>" width="100%" alt="">
+            <h4 class="text-center">Admission Incharge</h4>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+
+  <div class="container">
+
+    <div class="row mt-4">
+      <div class="col-md-6 mb-3">
+        <div class="">
+          <div class="bb p-2">
+            <h3 class="mb-0 p-1 ps-4"><i class="fa fa-university px-3"></i><%= homedata?.section1?.caption %></h3>
+          </div>
+          <div class="body px-5 pt-3 pb-4">
+            <p style="letter-spacing: 0.75px;margin-bottom: 0;"><%= homedata?.section1?.content %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="">
+          <div class="bb p-2">
+            <h3 class="mb-0 p-1 ps-4"><i class="fa fa-calendar px-3"></i><%= homedata?.section2?.caption %></h3>
+          </div>
+          <div class="body px-5 pt-3 pb-4">
+
+            <p style="letter-spacing: 0.75px;margin-bottom: 0;"><%= homedata?.section2?.content %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <div class="gallery container">
+      <div class="my-4 py-3">
+        <h2 class="mb-4"><i class="fa fa-image pe-2"></i> Our College Gallery</h2>
+        <div class="row">
+            
+
+            <% let gallery = slider.image
+                let inc = 1
+             if (gallery  && gallery.length > 0) { %>
+                <% gallery.forEach(function(item) { %>
+                    <% if (inc < 5) { %>
+                  <% if (item.foldername == 'mainpage') { %>
+              <div class="col-md-3 mt-3">
+                <div class="card p-3">
+                  <img src="/images/gallery/<%=item.newimagename %>" alt="Slider">
+                  
+                </div>
+              </div>
+                 <% inc = inc+1 ; %>
+                    <% } %>
+                  <% } %>
+                <% }); %>
+                <% } %>
+
+        </div>
+      </div>
+  </div>
+
+
+

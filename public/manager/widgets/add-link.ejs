@@ -1,0 +1,175 @@
+<!-- Content wrapper -->
+<div class="content-wrapper">
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <h4 class="py-3 mb-3">Widget</h4>
+
+            <div class="col-md-12">
+                    <!-- Form controls -->
+                        <div class="card mb-4">
+                            <h5 class="card-header">Important Link</h5>
+                            <div class="card-body">
+                                <div class="row">
+
+                                    <div class="card-body d-flex justify-content-center">
+                                        <div class="d-flex flex-wrap">
+                                    <% data.forEach(function(item){ %>
+
+                                        
+                                <div class="p-3">
+                                    <center>
+
+                                    <div class="border shadow p-4" style="width: 90px;height: 90px">
+                                        <i class="fa <%= item['faicon'] %> fa-3x"></i>
+                                    </div>
+                                        <p class="mt-3 mb-0"><%= item['heading'] %></p>
+                                        <a href="<%= item['href'] %>" class="mt-1"><%= item['href'] %></a>
+
+                                        <div class="mt-2">
+                                            <a href="/manager/delete-link/<%= item._id %>" class="btn btn-danger btn-sm p-2"><i class="fa fa-times-circle pe-2"></i> Delete </a>
+                                        </div>
+                                    </div>
+                                    </center>
+                                    <% }); %>
+                                        </div>
+                                        </div>
+                                        
+                                </div>
+
+
+                            </div>
+                        </div>
+            </div>
+
+            <div class="col-md-12">
+                    
+                    <!-- Create Important Link -->
+                        <div class="card mb-4">
+                            <h5 class="card-header">Create Important Link</h5>
+                            <div class="card-body">
+                                <form action="/manager/add-link" method="post">
+                                        
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-floating form-floating-outline mb-4">
+                                                <input type="text" class="form-control" id="faicon"
+                                                    placeholder="fa-book" name="faicon" />
+                                                <label for="faicon">Font Icon</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-floating form-floating-outline mb-4">
+                                                <input type="text" class="form-control" id="caption"
+                                                    placeholder="Heading" name="heading" />
+                                                <label for="caption">Caption</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-floating form-floating-outline mb-4">
+                                                <input type="text" class="form-control" id="href" name="href"
+                                                    placeholder="https://google.com" />
+                                                <label for="href">Link Path</label>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+            </div>
+
+            <div class="col-md-12">
+                    
+                    <!-- Create Important Link -->
+                        <div class="card mb-4">
+                            <h5 class="card-header">Select Icons</h5>
+                            <div class="card-body d-flex justify-content-center">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="border shadow p-4">
+                                            <i class="fa fa-fighter-jet fa-3x"></i>
+                                        </div>
+                                    <small class="d-flex justify-content-center pt-2">fa fa-fighter-jet</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="border shadow p-4">
+                                        <i class="fa fa-rocket fa-3x"></i>
+                                    </div>
+                                        <small class="d-flex justify-content-center pt-2">fa-rocket</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="border shadow p-4">
+                                            
+                                        <i class="fa fa-chain fa-3x"></i>
+                                    </div>
+                                    <small class="d-flex justify-content-center pt-2">fa-chain</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="border shadow p-4">
+                                        
+                                    <i class="fa fa-chain-broken fa-3x"></i>
+                                    </div>
+                                    <small class="d-flex justify-content-center pt-2">fa-chain-broken</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="border shadow p-4">
+                                        
+                                    <i class="fa fa-paperclip fa-3x"></i>
+                                    </div>
+                                    <small class="d-flex justify-content-center pt-2">fa-paperclip</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="border shadow p-4">
+                                        
+                                    <i class="fa fa-gear fa-3x"></i>
+                                    </div>
+                                    <small class="d-flex justify-content-center pt-2">fa-gear</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="border shadow p-4">
+                                    <i class="fa fa-hand-peace-o fa-3x"></i>
+                                    </div>
+                                    <small class="d-flex justify-content-center pt-2">fa-hand-peace-o</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="border shadow p-4">
+                                        
+                                    <i class="fa fa-file fa-3x"></i>
+                                    </div>
+                                    <small class="d-flex justify-content-center pt-2">fa-file</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="border shadow p-4">
+                                        
+                                    <i class="fa fa-file-word-o fa-3x"></i>
+                                    </div>
+                                    <small class="d-flex justify-content-center pt-2">fa-file-word-o</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="border shadow p-4">
+                                        
+                                    <i class="fa fa-file-text fa-3x"></i>
+                                    </div>
+                                    <small class="d-flex justify-content-center pt-2">fa-file-text</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="border shadow p-4">
+                                        <i class="fa fa-file-zip-o fa-3x"></i>
+                                    </div>
+                                    <small class="d-flex justify-content-center pt-2">fa-file-zip-o</small>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+            </div>
+            
+
+
+    </div>
+</div>

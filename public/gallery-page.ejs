@@ -1,0 +1,56 @@
+<div class="container my-5">
+    <ul class="nav nav-pills">
+    <li class="nav-item active">
+        <a class="nav-link active me-3" data-bs-toggle="pill" href="#home">All Image</a>
+    </li>
+        <% if(data && data.foldertype && data.foldertype.length > 0){ %>
+            <% data.foldertype.forEach((item)=>{ %>
+                <li class="nav-item me-3">
+                  <a class="nav-link" data-bs-toggle="pill" href="#<%= item.path %>"><%= item.name %></a>
+                </li>
+            <% }) } %>
+    </ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+        
+            <div class="tab-pane active fade" id="home">
+                <h3 class="mt-2 mb-0">All Image</h3>
+                <div class="row">
+                  <% if (data && data.image && data.image.length > 0) { %>
+                    <% data.image.forEach(function(item) { %>
+                      <% if (item.foldername != 'slider' &&  item.foldername != 'mainpage') { %>
+                  <div class="col-md-4 mt-3">
+                    <div class="card p-3">
+                      <img src="/images/gallery/<%=item.newimagename %>" alt="Slider">
+                    </div>
+                  </div>
+                      <% } %>
+                    <% }); %>
+                    <% } %>
+                </div>
+                
+            </div>
+
+        <% if(data && data.foldertype && data.foldertype.length > 0){ %>
+            <% data.foldertype.forEach((item)=>{ %>
+          
+          <div class="tab-pane fade" id="<%= item.path %>" role="tabpanel">
+            <h3 class="mt-2 mb-0"><%= item.name %></h3>
+            <div class="row">
+              <% if (data && data.image && data.image.length > 0) { %>
+                <% data.image.forEach(function(nesteditem) { %>
+                  <% if (nesteditem.foldername == item.path ) { %>
+              <div class="col-md-4 mt-3">
+                <div class="card p-3">
+                  <img src="/images/gallery/<%=nesteditem.newimagename %>" alt="Slider">
+                </div>
+              </div>
+                  <% } %>
+                <% }); %>
+                <% } %>
+            </div>
+          </div>
+            <% }) } %>
+  </div>
+</div>
