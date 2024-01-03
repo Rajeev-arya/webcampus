@@ -1,6 +1,7 @@
 const AdminUser = require("../models/admin_user");
 const jwt = require('jsonwebtoken');
 const MetaData = require("../models/meta_data");
+const Gallery = require("../models/gallery");
 const JWT_KEY = process.env.JWT_KEY
 
 const adminPage = async (req,res)=>{
@@ -58,10 +59,25 @@ const verifyManager = async (req,res)=>{
     try {
         const {username, password} = req.body
 
-        const response = await MetaData.findOne({'user.username': username}).select('user domain navigationbar').then(result=>{
-            console.log(result);
+        const response = await MetaData.findOne({'user.username': username}).select('_id user domain navigationbar collegename').then(result=>{
             
             req.session.metadata = result
+            return result;
+        }).catch(err=>{
+            console.error(err)
+            res.send(err);
+        })
+
+        await Gallery.findOne({domain:req.session.metadata.domain}).select('logo').then(result=>{
+            req.session.metadata = {  
+                _id: req.session.metadata._id,           
+                collegename: req.session.metadata.collegename,           
+                user: req.session.metadata.user,
+                domain: req.session.metadata.domain,
+                navigationbar: req.session.metadata.navigationbar, 
+                logo: result.logo 
+            }
+            console.log(req.session.metadata);
             return result;
         }).catch(err=>{
             console.error(err)

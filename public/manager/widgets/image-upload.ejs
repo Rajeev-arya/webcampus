@@ -78,7 +78,7 @@
                         <div class="row">
                           <div class="col-md-2">
                             <div class="card bg-dark">
-                              <% if (data.logo) { %>
+                              <% if (data?.logo) { %>
                                   <img class="card-img-top" src="/images/official/<%=data.logo %>" alt="Card image" width="100%">
                               <% }else{ %>
                                   <img class="card-img-top" src="/images/extras/user.jpg" alt="Card image" width="100%">
@@ -88,7 +88,7 @@
                                 <form action="/manager/upload-logo" method="post" enctype="multipart/form-data">
                                   <div class="mb-3">
                                     
-                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" />
+                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" required />
                                     <div class="d-flex justify-content-center">
                                       <button type="submit" class="btn btn-sm btn-primary mt-3">Upload</button>
                                     </div>
@@ -100,8 +100,8 @@
                           <div class="col-md-2">
                             <div class="card bg-dark">
                               
-                              <% if (data.principal) { %>
-                                  <img class="card-img-top" src="/images/official/<%=data.principal %>" alt="Card image" width="100%">
+                              <% if (data?.principal) { %>
+                                  <img class="card-img-top" src="/images/official/<%=data?.principal %>" alt="Card image" width="100%">
                               <% }else{ %>
                                   <img class="card-img-top" src="/images/extras/user.jpg" alt="Card image" width="100%">
                               <% } %>
@@ -111,7 +111,7 @@
                                 <form action="/manager/upload-principal" method="post" enctype="multipart/form-data">
                                   <div class="mb-3">
                                     
-                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" />
+                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*"  required/>
                                     <div class="d-flex justify-content-center">
                                       <button type="submit" class="btn btn-sm btn-primary mt-3">Upload</button>
                                     </div>
@@ -122,8 +122,8 @@
                           </div>
                           <div class="col-md-2">
                             <div class="card bg-dark">
-                              <% if (data.director) { %>
-                                  <img class="card-img-top" src="/images/official/<%=data.director %>" alt="Card image" width="100%">
+                              <% if (data?.director) { %>
+                                  <img class="card-img-top" src="/images/official/<%=data?.director %>" alt="Card image" width="100%">
                               <% }else{ %>
                                   <img class="card-img-top" src="/images/extras/user.jpg" alt="Card image" width="100%">
                               <% } %>
@@ -132,7 +132,7 @@
                                 <form action="/manager/upload-director" method="post" enctype="multipart/form-data">
                                   <div class="mb-3">
                                     
-                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" />
+                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" required/>
                                     <div class="d-flex justify-content-center">
                                       <button type="submit" class="btn btn-sm btn-primary mt-3">Upload</button>
                                     </div>
@@ -143,8 +143,8 @@
                           </div>
                           <div class="col-md-2">
                             <div class="card bg-dark">
-                              <% if (data.secretary) { %>
-                                  <img class="card-img-top" src="/images/official/<%=data.secretary %>" alt="Card image" width="100%">
+                              <% if (data?.secretary) { %>
+                                  <img class="card-img-top" src="/images/official/<%=data?.secretary %>" alt="Card image" width="100%">
                               <% }else{ %>
                                   <img class="card-img-top" src="/images/extras/user.jpg" alt="Card image" width="100%">
                               <% } %>
@@ -153,7 +153,7 @@
                                 <form action="/manager/upload-secretary" method="post" enctype="multipart/form-data">
                                   <div class="mb-3">
                                     
-                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" />
+                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" required/>
                                     <div class="d-flex justify-content-center">
                                       <button type="submit" class="btn btn-sm btn-primary mt-3">Upload</button>
                                     </div>
@@ -164,8 +164,8 @@
                           </div>
                           <div class="col-md-2">
                             <div class="card bg-dark">
-                              <% if (data.incharge) { %>
-                                  <img class="card-img-top" src="/images/official/<%=data.incharge %>" alt="Card image" width="100%">
+                              <% if (data?.incharge) { %>
+                                  <img class="card-img-top" src="/images/official/<%=data?.incharge %>" alt="Card image" width="100%">
                               <% }else{ %>
                                   <img class="card-img-top" src="/images/extras/user.jpg" alt="Card image" width="100%">
                               <% } %>
@@ -174,7 +174,7 @@
                                 <form action="/manager/upload-incharge" method="post" enctype="multipart/form-data">
                                   <div class="mb-3">
                                     
-                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" />
+                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" required/>
                                     <div class="d-flex justify-content-center">
                                       <button type="submit" class="btn btn-sm btn-primary mt-3">Upload</button>
                                     </div>

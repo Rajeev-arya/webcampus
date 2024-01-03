@@ -4,7 +4,10 @@ const mongoose = require('mongoose');
 const MainPageSchema = new mongoose.Schema({
   id: String,
   title: String,
-  domain: String,
+  domain: {
+    type: String,
+    index: true
+  },
   marquee: {
     active: Boolean,
     content: String

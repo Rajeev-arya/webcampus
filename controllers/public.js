@@ -3,17 +3,19 @@ const MainPage = require("../models/home_page")
 const MetaData = require("../models/meta_data")
 const Page = require("../models/pages")
 
-const domain = 'brsy.co.in'
+const domain = 'localhost'
 
 const mainpage = async (req,res)=>{
-  const domain = req.hostname
-  // console.log(req.hostname);
-  if (domain == 'webcampus.in') {
-    
+  // const domain = req.hostname
+  const domain = 'rpscollegeharnaut.com'
+
+  console.log(domain);
+  if (domain == '195.179.193.138') {
     return res.render('webcampus', { layout: false })
   }
 
     const metadata = await MetaData.findOne({domain})
+    console.log(metadata);
     const homedata = await MainPage.findOne({domain})
     const slider = await Gallery.findOne({domain})
     res.render('index', {metadata, homedata, slider})
@@ -22,9 +24,8 @@ const mainpage = async (req,res)=>{
 const otherpage = async (req,res)=>{
 
   // Condition for webcampus.in site
-  const domain = req.hostname
-  // const domain = 'webcampus.in'
-  if (domain == 'webcampus.in') {
+  // const domain = req.hostname
+  if (domain == '195.179.193.138') {
     const id = req.params.id
     if (id) {
       return res.render('webcampus-404', { layout: false })
@@ -84,10 +85,10 @@ const otherpage = async (req,res)=>{
 
 const subpage = async (req,res)=>{
 
-  const domain = req.hostname
+  // const domain = req.hostname
   // const domain = 'webcampus.in'
 
-  if (domain == 'webcampus.in') {
+  if (domain == '195.179.193.138') {
     const subid = req.params.subid
     if (subid) {
       return res.render('webcampus-404', { layout: false })

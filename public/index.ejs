@@ -8,7 +8,7 @@
                 <div class="item">
                     <div class="image-box">
                         <div class="image">
-                        <img src="/images/gallery/<%=item.newimagename %>" alt="Slider">
+                        <img src="/images/gallery/<%=item.newimagename %>" style="max-height:600px"  alt="Slider">
                         </div>
                     </div>
                 </div>
@@ -177,21 +177,21 @@
             
             <% if (slider?.secretary) { %>
           <div class="col-md-4">
-            <img class="p-4 pb-2" src="/images/official/<%=slider.secretary %>" width="100%" alt="">
+            <img class="p-4 pb-2" src="/images/official/<%=slider.secretary %>" width="100%" alt="College Secretary">
             <h4 class="text-center">Secretary</h4>
           </div>
             <% } %>
 
             <% if (slider?.director) { %>
           <div class="col-md-4">
-            <img class="p-4 pb-2" src="/images/official/<%=slider.director %>" width="100%" alt="">
+            <img class="p-4 pb-2" src="/images/official/<%=slider.director %>" width="100%" alt="College director">
             <h4 class="text-center">Director</h4>
           </div>
           <% } %>
           
           <% if (slider?.incharge) { %>
           <div class="col-md-4">
-            <img class="p-4 pb-2" src="/images/official/<%=slider.incharge %>" width="100%" alt="">
+            <img class="p-4 pb-2" src="/images/official/<%=slider.incharge %>" width="100%" alt="College Admission Incharge">
             <h4 class="text-center">Admission Incharge</h4>
           </div>
           <% } %>
@@ -206,6 +206,7 @@
   <div class="container">
 
     <div class="row mt-4">
+        <% if (homedata?.section1) { %>
       <div class="col-md-6 mb-3">
         <div class="important-link-section">
           <div class="header p-2">
@@ -216,17 +217,20 @@
           </div>
         </div>
       </div>
+      <% } %>
+
+      <% if (homedata?.section1) { %>
       <div class="col-md-6 mb-3">
         <div class="important-link-section">
           <div class="header p-2">
             <h3 class="mb-0 p-1 text-center"><i class="fa fa-calendar px-3"></i><%= homedata?.section2?.caption %></h3>
           </div>
           <div class="body px-5 pt-3 pb-4">
-
             <p style="letter-spacing: 0.75px;margin-bottom: 0;"><%= homedata?.section2?.content %></p>
           </div>
         </div>
       </div>
+      <% } %>
     </div>
   </div>
 

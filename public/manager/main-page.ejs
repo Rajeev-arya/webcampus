@@ -153,14 +153,14 @@
                                                     <div style="background-color: <%- item.bglight %>;width: 20%;"></div>
                                                   </div>                    
                                                 </span>
-                                                <% if(meta_data?.themecolor.themecolorid == item._id){ %>
+                                                <% if(meta_data?.themecolor.themecolor == item.name){ %>
                                                     <div class="d-flex justify-content-center">
-                                                        <input name="themecolor" class="form-check-input my-2" type="radio" value="<%- item._id %>" id="<%- item._id %>" checked="">
+                                                        <input name="themecolor" class="form-check-input my-2" type="radio" value="<%- item.name %>" id="<%- item._id %>" checked="">
                                                     </div>
                                                 <% }else{ %>
 
                                                     <div class="d-flex justify-content-center">
-                                                        <input name="themecolor" class="form-check-input my-2" type="radio" value="<%- item._id %>" id="<%- item._id %>">
+                                                        <input name="themecolor" class="form-check-input my-2" type="radio" value="<%- item.name %>" id="<%- item._id %>">
                                                     </div>
                                                 <%} %>
                                             </label>                  

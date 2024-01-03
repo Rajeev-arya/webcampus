@@ -9,7 +9,8 @@ const metaDataSchema = new mongoose.Schema({
     domain: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        index: true
     },
     principal:{
         type: String
@@ -48,25 +49,39 @@ const metaDataSchema = new mongoose.Schema({
     },
     navigationbar: [
         {
+            _id: {
+                type: mongoose.Schema.Types.ObjectId, auto: true 
+            },
             text: String,
             href: String,
             itemtype: String,
             dropdown: [
-                { text: String, href: String },
-                { text: String, href: String },
-                { text: String, href: String }
+                { 
+                    _id: {
+                        type: mongoose.Schema.Types.ObjectId, auto: true 
+                    },
+                    text: String, 
+                    href: String 
+                }
             ]
         }
     ],
     footer: [
         {
+            _id: {
+                type: mongoose.Schema.Types.ObjectId, auto: true 
+            },
             text: String,
             href: String,
             itemtype: String,
             dropdown: [
-                { text: String, href: String },
-                { text: String, href: String },
-                { text: String, href: String }
+                { 
+                    _id: {
+                        type: mongoose.Schema.Types.ObjectId, auto: true 
+                    },
+                    text: String, 
+                    href: String 
+                }
             ]
         }
     ],

@@ -4,9 +4,14 @@ const ejsLayout = require('express-ejs-layouts')
 const session = require('express-session');
 const cookies = require('cookie-parser')
 const MongoStore = require('connect-mongo')
+const compression = require('compression')
 
 const rooturl = path.resolve(__dirname, '..')
 // const staticFolderPath = path.join(pathurl, 'public')
+
+const gzipcompressior = (app)=>{
+    app.use(compression())
+}
 
 const bodyParser = (app) =>{
     app.use(express.json())
@@ -110,5 +115,6 @@ module.exports = {
     cookieParser, 
     managerEjsLayout,
     nodeModulePath,
-    staticImagePath
+    staticImagePath,
+    gzipcompressior
 }

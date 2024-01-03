@@ -12,7 +12,7 @@ const MainPage = require("./models/home_page")
 
 // Initialise the application
 const app = express()
-const DEFAULT_PORT =  PORT || 3000 
+const DEFAULT_PORT =  PORT || 8080
 
 // Database connection
 database(URL)
@@ -20,38 +20,15 @@ database(URL)
 // Express middlewares # jsonparser #urlencoding #staticpath
 expressMiddleware(app)
 
-
-// Routes
-// app.get('/',async (req,res)=>{
-//     res.render('index')
-// })
-// Routes
-// app.post('/',async (req,res)=>{
-//     await AdminUser.create({username:"Aditya",password:"123456"})
-//     res.render('index')
-// })
-
 app.use('/admin',admindata, adminLoggedIn, adminRouter)
 
 app.use('/manager',managerdata, managerLoggedIn, managerRouter)
 
 app.use('/login', loginRouter)
+
 app.use('/', publicRouter)
 
 
-
-// testing route
-app.patch('/testing', async (req, res)=>{
-    const payload = req.body
-    const domain = req.session.metadata._id
-    console.log(payload);
-    // return res.json(payload)
-    const response = await MainPage.findOne({domain: domain,  'importantlink.content._id': payload })
-    res.json(response)
-})
-
-const mongoose = require('mongoose')
-// testing route
 // app.patch('/color-array', async (req, res)=>{
     
 //     // The new object to be inserted into the colourpallet array

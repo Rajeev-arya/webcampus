@@ -1,13 +1,38 @@
 const AdminUser = require("../models/admin_user")
+const Gallery = require("../models/gallery")
 const MainPage = require("../models/home_page")
 const MetaData = require("../models/meta_data")
+const mongoose = require('mongoose')
 
 
 
 // const domain = req.session.metadata.domain
 
 async function managerDashboard(req,res) {
-    res.render('manager/dashboard')
+
+
+    const domain = req.session.metadata.domain
+
+    const response = await MainPage.findOne({'domain': domain}).select('notice news importantlink').then(result=>{
+        return result
+    }).catch(err=>{
+        console.error(err)
+    })
+
+    // Get the count of total images in gallery including documents
+    let count = await Gallery.aggregate([
+        { $match: { domain: domain} },
+        {
+          $project: {
+            numberOfImages: { $size: '$image' }
+          }
+        }
+      ]);
+
+      count = count[0].numberOfImages
+
+
+    res.render('manager/dashboard',{ count, data: response})
 }
 
 
@@ -96,53 +121,78 @@ const widgetPage = (req,res)=>{
     }
 
     const addNavigationItem = async(req,res)=>{
-    // const
-    const body = req.body
-    const domain = req.session.metadata.domain
 
-    if (!body.itemtype) {
-        body.itemtype = 'simple'
-    }
-    const payload = {
-        text: body.itemname,
-        href: body.link,
-        itemtype: body.itemtype
-    }
+        const body = req.body
+        const domain = req.session.metadata.domain
 
+        if (!body.itemtype) {
+            body.itemtype = 'simple'
+        }
+        const payload = {
+            _id: new mongoose.Types.ObjectId(),
+            text: body.itemname,
+            href: body.link,
+            itemtype: body.itemtype
+        }
 
-    const result = await MetaData.findOneAndUpdate(
-        { domain: domain },
-        { $push: { 'navigationbar': payload } },
-        { new: true }
-      );
+        const result = await MetaData.findOneAndUpdate(
+            { domain: domain },
+            { $push: { 'navigationbar': payload } },
+            { new: true }
+        );
 
-    res.redirect('add-navigation')
+            // Fetch all college data from database
+                await MetaData.findOne({domain}).select('_id user domain navigationbar').then(result=>{
+                    console.log(result);
+                    req.session.metadata = result
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        res.send(err);
+                    });
+
+        await res.redirect('add-navigation')
     }
 
     const addNavigationSubItem = async(req,res)=>{
 
         const domain = req.session.metadata.domain
-        const subitemid = req.params.subid
         const navitemid = req.params.id
+        const body = req.body
     
-        // Function to delete a navigationbar item by domain and ID
-            const deleteNavigationBarSubItem = async (domain, navitemid, subitemid) => {
-                try {
-                    const result = await MetaData.findOneAndUpdate(
-                        { domain: domain, 'navigationbar._id': navitemid },
-                        { $pull: { 'navigationbar.$.dropdown': { _id: subitemid } } },
-                        { new: true } // To return the modified document
-                    );
+        // Function to add navigationbar item by domain and ID
     
-                    // Select the updated navigation bar and return to page
-                    res.redirect('/manager/add-navigation')
-                    
-                } catch (error) {
-                    console.error(error);
-                }
-            };
-    
-            deleteNavigationBarSubItem(domain, navitemid, subitemid);
+        const payload = [{
+            _id: new mongoose.Types.ObjectId(),
+            text: body.itemname,
+            href: body.link
+        }]
+
+        await MetaData.findOneAndUpdate({
+            domain:domain,
+            'navigationbar._id': navitemid
+        },
+            {
+                $push: {
+                  'navigationbar.$.dropdown': {
+                    $each: payload,
+                  },
+                },
+              },
+            )
+            
+        
+            // Refresh Side Navigation Pages Section
+            await MetaData.findOne({domain}).select('_id user domain navigationbar').then(result=>{
+                console.log(result);
+                req.session.metadata = result
+                })
+                .catch(err => {
+                    console.error(err);
+                    res.send(err);
+                });
+
+        await res.redirect('/manager/add-navigation')
     }
     
     const deleteSubNavitem = async(req,res)=>{
@@ -160,8 +210,19 @@ const widgetPage = (req,res)=>{
                         { new: true } // To return the modified document
                     );
 
+                    
+                // Refresh Side Navigation Pages Section
+                await MetaData.findOne({domain}).select('user domain navigationbar').then(result=>{
+                    console.log(result);
+                    req.session.metadata = result
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        res.send(err);
+                    });
+
                     // Select the updated navigation bar and return to page
-                    res.redirect('/manager/add-navigation')
+                    await res.redirect('/manager/add-navigation')
                     
                 } catch (error) {
                     console.error(error);
@@ -185,9 +246,20 @@ const widgetPage = (req,res)=>{
                         { $pull: { 'navigationbar': { _id: navigationBarItemId } } },
                         { new: true } // To return the modified document
                     );
+
+                    
+                    // Refresh Side Navigation Pages Section
+                    await MetaData.findOne({domain}).select('user domain navigationbar').then(result=>{
+                        console.log(result);
+                        req.session.metadata = result
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            res.send(err);
+                        });
     
                     // Select the updated navigation bar and return to page
-                    res.redirect('/manager/add-navigation')
+                    await res.redirect('/manager/add-navigation')
                     
                 } catch (error) {
                     console.error(error);
@@ -202,6 +274,7 @@ const widgetPage = (req,res)=>{
     
         const domain = req.session.metadata.domain
         const response = await MetaData.findOne({'domain': domain}).select('footer').then(result=>{
+            
             return result
         }).catch(err=>{
             console.error(err)
@@ -341,12 +414,14 @@ const widgetPage = (req,res)=>{
 
         const colorNameToSearch = req.body.themecolor
 
-        let themecolor = await AdminUser.findOne({ 'theme.colourpallet': { $elemMatch: { _id: colorNameToSearch } } },
+        let themecolor = await AdminUser.findOne({ 'theme.colourpallet': { $elemMatch: { name: colorNameToSearch } } },
         { 'theme.colourpallet.$': 1 })
+
+        // console.log(colorNameToSearch, themecolor);
 
         themecolor = themecolor.theme.colourpallet[0]
 
-        // console.log(themecolor);
+        // return
         // res.json({message: themecolor})
         
         const meta_payload = {
@@ -376,6 +451,8 @@ const widgetPage = (req,res)=>{
         }
 
         const updateMetaData = await MetaData.findByIdAndUpdate(collegeid, meta_payload)
+
+        console.log(collegeid, meta_payload);
 
         const main_page_payload = {
             title: body.title,

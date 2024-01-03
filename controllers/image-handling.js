@@ -1,5 +1,6 @@
 const Gallery = require("../models/gallery");
 const MainPage = require("../models/home_page");
+const mongoose = require('mongoose')
 
 const imageUploadPage = async(req,res)=>{
     const domain = req.session.metadata.domain
@@ -14,6 +15,8 @@ const imageUpload = async(req, res)=>{
     const domain = req.session.metadata.domain
     let payload = req.image
     payload = {
+      
+      _id: new mongoose.Types.ObjectId(),
         newimagename: payload.newimagename,
         foldername: req.body.foldername
 
@@ -33,6 +36,8 @@ const imageUpload = async(req, res)=>{
 const imagetype = async(req,res)=>{
     const domain = req.session.metadata.domain
     const payload = {
+      
+      _id: new mongoose.Types.ObjectId(),
         name: req.body.imagename,
         path: req.body.imagepath
     }

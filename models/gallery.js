@@ -1,10 +1,15 @@
 const mongoose = require('mongoose')
 
 const gallerySchema = new mongoose.Schema({
-    domain: String,
+    domain: {
+        type: String,
+        index: true
+    },
     image:[{
+        _id: {
+            type: mongoose.Schema.Types.ObjectId, auto: true 
+        },
         foldername: String,
-        // originalname: String,
         newimagename: String
     }],
     foldertype: [{

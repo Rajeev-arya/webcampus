@@ -4,7 +4,8 @@ const pageSchema = new mongoose.Schema({
     pageid: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        index: true
     },
     content: {
         type: String
