@@ -1,7 +1,11 @@
-  <header class="py-3">
-    <h1 class="text-center"><%= metadata?.collegename %></h1>
-    <h3 class="text-center"><%= metadata?.collegedata?.tagline %></h3>
-  </header>
+  <header class="d-flex flex-start align-items-center">
+    <% if(slider?.logo){ %>
+      <img src="/images/official/<%= slider.logo %>" alt="College Logo">
+    <% } %>
+    <div>
+      <h1><%= metadata?.collegename %></h1>
+      <h3><%= metadata?.collegedata?.tagline %></h3>
+    </div></header>
 
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">

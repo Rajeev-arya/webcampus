@@ -10,7 +10,6 @@ const mongoose = require('mongoose')
 
 async function managerDashboard(req,res) {
 
-
     const domain = req.session.metadata.domain
 
     const response = await MainPage.findOne({'domain': domain}).select('notice news importantlink').then(result=>{

@@ -3,11 +3,10 @@ const MainPage = require("../models/home_page")
 const MetaData = require("../models/meta_data")
 const Page = require("../models/pages")
 
-const domain = 'localhost'
+// const domain = 'rpscollegeharnaut.com'
 
 const mainpage = async (req,res)=>{
-  // const domain = req.hostname
-  const domain = 'rpscollegeharnaut.com'
+  const domain = req.hostname
 
   console.log(domain);
   if (domain == '195.179.193.138') {
@@ -24,7 +23,7 @@ const mainpage = async (req,res)=>{
 const otherpage = async (req,res)=>{
 
   // Condition for webcampus.in site
-  // const domain = req.hostname
+  const domain = req.hostname
   if (domain == '195.179.193.138') {
     const id = req.params.id
     if (id) {
@@ -77,15 +76,17 @@ const otherpage = async (req,res)=>{
                 const slider = await Gallery.findOne({domain})
                 return res.render('404', {metadata: metadata,homedata, slider})
             }
+            
+            const slider = await Gallery.findOne({domain})
             // console.log(response[0]);
         const payload = response[0].content
-        res.render('dynamic-page', {data: payload, metadata})
+        res.render('dynamic-page', {data: payload, metadata, slider})
   }
 }
 
 const subpage = async (req,res)=>{
 
-  // const domain = req.hostname
+  const domain = req.hostname
   // const domain = 'webcampus.in'
 
   if (domain == '195.179.193.138') {
@@ -131,7 +132,9 @@ const subpage = async (req,res)=>{
             return res.render('404', {metadata: metadata,homedata, slider})
         }
         const payload = response[0].content
-        return res.render('dynamic-page', {data: payload, metadata: metadata})
+        const slider = await Gallery.findOne({domain})
+
+        return res.render('dynamic-page', {data: payload, metadata, slider})
         // console.log('Found ID:', id);
       } else {
         console.log('No matching document found.');

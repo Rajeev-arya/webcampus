@@ -11,7 +11,13 @@
   header {
     background-color: var(--white);
     color: var(--text-dark);
-    padding: 1rem;
+    padding: 12px;
+  }
+  header img{
+    margin-right: 36px;
+    margin-left: 24px;
+    height: 100px;
+    width: 100px;
   }
   header h3 {
     margin-bottom: 0;
@@ -181,3 +187,27 @@ a.a-plane{
   ul.footer-item li a{
     color: var(--text-light);
   }
+
+/* Media query for small screens */
+@media only screen and (max-width: 767px) {
+  header{
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+  header img{
+    width: 48px;
+    height: 48px;
+    margin-right: 8px;
+    margin-left: 8px;
+  }
+  header div h1 {
+    font-size: 20px;
+    text-align: center;
+  }
+  header div h3 {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  /* Additional styles for small screens */
+}
