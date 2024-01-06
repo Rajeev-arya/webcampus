@@ -17,11 +17,12 @@ const expressMiddleware = (app)=>{
     sessionManager(app, SESSION_KEY)
     cookieParser(app)
     nodeModulePath(app)
-    if (SERVER == 'PROD') {
-        staticServerImagePath(app)
-    } else {
-        staticImagePath(app)
-    }
+    staticServerImagePath(app)
+    // if (SERVER == 'PROD') {
+        
+    // } else {
+    //     staticImagePath(app)
+    // }
 }
 
 module.exports = {

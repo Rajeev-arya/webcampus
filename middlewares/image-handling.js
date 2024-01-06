@@ -2,18 +2,8 @@ const multer = require('multer')
 const path = require('path');
 const { imagepath } = require('../util/img-upload');
 
-const dotenv = require('dotenv')
-dotenv.config()
-const SERVER = process.env.SERVER
 
-let imgpath
-
-if (SERVER == 'PROD') {
-  imgpath =  '../images/static-images'
-} else {
-  imgpath =  'images'
-}
-
+let imgpath =  '../images/static-images'
 
 console.log(imgpath);
 

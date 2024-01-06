@@ -44,8 +44,7 @@ const otherpage = async (req,res)=>{
   const id = req.params.id
   // console.log(id);
   if (id == 'gallery') {
-    const gallery = await Gallery.findOne({domain})
-    const slider = gallery
+    const gallery = slider
     return res.render('gallery-page', {metadata, data:gallery, slider:slider})
     
   }else if(id == '' || id == 'favicon.ico'){
@@ -78,13 +77,10 @@ const otherpage = async (req,res)=>{
         let pageid = result[0]._id
         const response = await Page.find({pageid})
             if (response[0] == undefined) {
-                const metadata = await MetaData.findOne({domain})
                 const homedata = await MainPage.findOne({domain})
-                const slider = await Gallery.findOne({domain})
                 return res.render('404', {metadata,homedata, slider})
             }
             
-        const slider = await Gallery.findOne({domain})
             // console.log(response[0]);
         const payload = response[0].content
         res.render('dynamic-page', {data: payload, metadata, slider})
@@ -95,6 +91,7 @@ const subpage = async (req,res)=>{
 
   const domain = hostname(SERVER, TEST_DOMAIN, req)
 
+  const metadata = await MetaData.findOne({domain})
   // const domain = 'webcampus.in'
 
   if (domain == IP) {
@@ -106,7 +103,6 @@ const subpage = async (req,res)=>{
 
   }
   
-  const metadata = await MetaData.findOne({domain})
   const desiredNavLinkHref = req.params.id;
   const desiredNestedNavLinkHref = req.params.subid;
   const desiredDomain = domain; 
@@ -133,14 +129,13 @@ const subpage = async (req,res)=>{
         
         // check for page 
         const response = await Page.find({pageid:id})
+
+        const slider = await Gallery.findOne({domain})
         if (response[0] == undefined) {
-            const metadata = await MetaData.findOne({domain})
             const homedata = await MainPage.findOne({domain})
-            const slider = await Gallery.findOne({domain})
             return res.render('404', {metadata: metadata,homedata, slider})
         }
         const payload = response[0].content
-        const slider = await Gallery.findOne({domain})
 
         return res.render('dynamic-page', {data: payload, metadata:metadata, slider:slider})
         // console.log('Found ID:', id);
