@@ -109,7 +109,7 @@
                             </div>
                             <div class="ms-3">
                               <div class="small mb-1">Gallery Images</div>
-                              <h5 class="mb-0 text-center"><%= count %></h5>
+                              <h5 class="mb-0 text-center"></h5>
                             </div>
                           </div>
                         </div>
@@ -138,18 +138,6 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <% sr = 0 %>
-                          <% if(data && data.notice && data.notice.content.length > 0){ %>
-                          <% data.notice.content.forEach(function(item){ %>
-                            <% sr = sr+1 %>
-                            <tr>
-                              <td><%= sr %></td>
-                              <td><%= item['caption'] %></td>
-                              <td><%= item['date'] %></td>
-                              <td><a href="/images/notices/<%= item['filepath'] %>" download="" class="btn btn-sm btn-primary">File</a></td>
-                            </tr>
-                          <% }); %>
-                          <% } %>
                         </tbody>
                       </table>
                     </div>
@@ -173,18 +161,6 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <% sr = 0 %>
-                          <% if(data && data.news && data.news.content.length > 0){ %>
-                          <% data.news.content.forEach(function(item){ %>
-                            <% sr = sr+1 %>
-                            <tr>
-                              <td><%= sr %></td>
-                              <td><%= item['caption'] %></td>
-                              <td><%= item['date'] %></td>
-                              <td><a href="/images/notices/<%= item['filepath'] %>" download="" class="btn btn-sm btn-primary">File</a></td>
-                            </tr>
-                          <% }); %>
-                          <% } %>
                         </tbody>
                       </table>
                     </div>
