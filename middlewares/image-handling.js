@@ -1,19 +1,17 @@
 const multer = require('multer')
 const path = require('path');
-const { imagepath } = require('../util/img-upload');
-
-
 
 
 // Multer setup for handling file uploads
 const sliderPath = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..', '..', 'images', 'static-images' ,'gallery'));
+    // cb(null, path.join(__dirname,'..', '..', 'images', 'static-images' ,'gallery'));
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
     cb(null, filename);
     const data = {
+      
       folder: filename.fieldname,
       originalname: filename.fieldname,
       newimage: filename.newimagename
@@ -24,7 +22,7 @@ const sliderPath = multer.diskStorage({
 // Multer setup for handling file uploads
 const principalPath = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..', '..', 'images', 'static-images' ,'official'));
+    // cb(null, path.join(__dirname,'..', '..', 'images', 'static-images' ,'official'));
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
@@ -36,7 +34,7 @@ const principalPath = multer.diskStorage({
 // Multer setup for handling file uploads
 const noticePath = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..', '..', 'images', 'static-images'  ,'notices'));
+    // cb(null, path.join(__dirname,'..', '..', 'images', 'static-images'  ,'notices'));
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
@@ -47,7 +45,7 @@ const noticePath = multer.diskStorage({
 // Multer setup for handling file uploads
 const newsPath = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..', '..', 'images', 'static-images'  ,'news'));
+    // cb(null, path.join(__dirname,'..', '..', 'images', 'static-images'  ,'news'));
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
@@ -84,6 +82,7 @@ const principalMiddleware = (req, res, next)=>{
 const sliderMiddlerware = (req, res, next)=>{
     
     const data = {
+      serverpath : path.join(__dirname,'..', '..', 'images', 'static-images' ,'gallery'),
       newimagename: req.file.filename
     }
 

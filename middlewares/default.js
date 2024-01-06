@@ -91,7 +91,7 @@ const staticImagePath = (app)=>{
 }
 
 const staticServerImagePath = (app)=>{
-    const staticPath = path.join(rooturl, 'static')
+    const staticPath = path.join(rooturl, 'images')
     app.use('/images',express.static(staticPath))
 }
 

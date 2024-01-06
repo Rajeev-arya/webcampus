@@ -10,7 +10,7 @@ const SESSION_KEY = process.env.SESSION_KEY
 const SERVER = process.env.SERVER
 
 const expressMiddleware = (app)=>{
-    gzipcompressior(app)
+    // gzipcompressior(app)
     bodyParser(app)
     viewEngine(app)
     staticPath(app)

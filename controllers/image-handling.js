@@ -28,7 +28,7 @@ const imageUpload = async(req, res)=>{
         { $push: { 'image': payload } },
         { new: true }
       );
-    
+    console.log(req.image);
     res.redirect('/manager/upload-image')
     
 }
