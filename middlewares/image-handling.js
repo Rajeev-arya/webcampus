@@ -6,7 +6,16 @@ const dotenv = require('dotenv')
 dotenv.config()
 const SERVER = process.env.SERVER
 
-const imgpath  = imagepath(SERVER)
+let imgpath
+
+if (SERVER == 'PROD') {
+  imgpath =  '../images/static-images'
+} else {
+  imgpath =  'images'
+}
+
+
+console.log(imgpath);
 
 // Multer setup for handling file uploads
 const sliderPath = multer.diskStorage({
