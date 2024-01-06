@@ -3,14 +3,12 @@ const path = require('path');
 const { imagepath } = require('../util/img-upload');
 
 
-let imgpath =  '../images/static-images'
 
-console.log(imgpath);
 
 // Multer setup for handling file uploads
 const sliderPath = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..', imgpath,'gallery'));
+    cb(null, path.join(__dirname,'..', '..', 'images', 'static-images' ,'gallery'));
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
@@ -26,7 +24,7 @@ const sliderPath = multer.diskStorage({
 // Multer setup for handling file uploads
 const principalPath = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..', imgpath,'official'));
+    cb(null, path.join(__dirname,'..', '..', 'images', 'static-images' ,'official'));
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
@@ -38,7 +36,7 @@ const principalPath = multer.diskStorage({
 // Multer setup for handling file uploads
 const noticePath = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..', imgpath ,'notices'));
+    cb(null, path.join(__dirname,'..', '..', 'images', 'static-images'  ,'notices'));
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
@@ -49,7 +47,7 @@ const noticePath = multer.diskStorage({
 // Multer setup for handling file uploads
 const newsPath = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..', imgpath ,'news'));
+    cb(null, path.join(__dirname,'..', '..', 'images', 'static-images'  ,'news'));
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
