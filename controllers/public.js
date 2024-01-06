@@ -2,14 +2,20 @@ const Gallery = require("../models/gallery")
 const MainPage = require("../models/home_page")
 const MetaData = require("../models/meta_data")
 const Page = require("../models/pages")
+const dotenv = require('dotenv')
+const { hostname } = require("../util/public")
+dotenv.config()
+const IP = process.env.IP
+const TEST_DOMAIN = process.env.TEST_DOMAIN
+const SERVER = process.env.SERVER
 
-// const domain = 'rpscollegeharnaut.com'
+// const domain = TEST_DOMAIN
 
 const mainpage = async (req,res)=>{
-  const domain = req.hostname
 
-  console.log(domain);
-  if (domain == '195.179.193.138') {
+  const domain = hostname(SERVER, TEST_DOMAIN, req)
+
+  if (domain == IP) {
     return res.render('webcampus', { layout: false })
   }
 
@@ -23,8 +29,9 @@ const mainpage = async (req,res)=>{
 const otherpage = async (req,res)=>{
 
   // Condition for webcampus.in site
-  const domain = req.hostname
-  if (domain == '195.179.193.138') {
+  const domain = hostname(SERVER, TEST_DOMAIN, req)
+
+  if (domain == IP) {
     const id = req.params.id
     if (id) {
       return res.render('webcampus-404', { layout: false })
@@ -86,10 +93,11 @@ const otherpage = async (req,res)=>{
 
 const subpage = async (req,res)=>{
 
-  const domain = req.hostname
+  const domain = hostname(SERVER, TEST_DOMAIN, req)
+
   // const domain = 'webcampus.in'
 
-  if (domain == '195.179.193.138') {
+  if (domain == IP) {
     const subid = req.params.subid
     if (subid) {
       return res.render('webcampus-404', { layout: false })

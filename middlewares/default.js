@@ -90,6 +90,11 @@ const staticImagePath = (app)=>{
     app.use('/images',express.static(staticPath))
 }
 
+const staticServerImagePath = (app)=>{
+    const staticPath = path.join(rooturl, 'static/images')
+    app.use('/images',express.static(staticPath))
+}
+
 const sessionManager = (app, key)=>{
     const MONGO_PATH = process.env.DATABASE_URL
     app.use(session({
@@ -116,5 +121,5 @@ module.exports = {
     managerEjsLayout,
     nodeModulePath,
     staticImagePath,
-    gzipcompressior
+    gzipcompressior, staticServerImagePath
 }

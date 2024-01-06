@@ -14,6 +14,10 @@ const MainPage = require("./models/home_page")
 const app = express()
 const DEFAULT_PORT =  PORT || 8080
 
+// Deployment Types
+
+// const SERVER = 'DEV' // 'PROD' for Production 'DEV' for Development
+
 // Database connection
 database(URL)
 

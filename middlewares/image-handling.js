@@ -1,11 +1,17 @@
 const multer = require('multer')
 const path = require('path');
+const { imagepath } = require('../util/img-upload');
 
+const dotenv = require('dotenv')
+dotenv.config()
+const SERVER = process.env.SERVER
+
+const imgpath  = imagepath(SERVER)
 
 // Multer setup for handling file uploads
 const sliderPath = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..', 'images','gallery'));
+    cb(null, path.join(__dirname,'..', imgpath,'gallery'));
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
@@ -21,7 +27,7 @@ const sliderPath = multer.diskStorage({
 // Multer setup for handling file uploads
 const principalPath = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..', 'images','official'));
+    cb(null, path.join(__dirname,'..', imgpath,'official'));
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
@@ -33,7 +39,7 @@ const principalPath = multer.diskStorage({
 // Multer setup for handling file uploads
 const noticePath = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..', 'images','notices'));
+    cb(null, path.join(__dirname,'..', imgpath ,'notices'));
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
@@ -44,7 +50,7 @@ const noticePath = multer.diskStorage({
 // Multer setup for handling file uploads
 const newsPath = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..', 'images','news'));
+    cb(null, path.join(__dirname,'..', imgpath ,'news'));
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
@@ -85,7 +91,6 @@ const sliderMiddlerware = (req, res, next)=>{
     }
 
     req.image = data
-    console.log("slider middleware");
     next()
 
   }
