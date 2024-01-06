@@ -20,7 +20,6 @@ const mainpage = async (req,res)=>{
   }
 
     const metadata = await MetaData.findOne({domain})
-    console.log(metadata);
     const homedata = await MainPage.findOne({domain})
     const slider = await Gallery.findOne({domain})
     res.render('index', {metadata, homedata, slider})
@@ -31,6 +30,7 @@ const otherpage = async (req,res)=>{
   // Condition for webcampus.in site
   const domain = hostname(SERVER, TEST_DOMAIN, req)
 
+  const slider = await Gallery.findOne({domain})
   if (domain == IP) {
     const id = req.params.id
     if (id) {
@@ -42,16 +42,16 @@ const otherpage = async (req,res)=>{
   const metadata = await MetaData.findOne({domain})
 
   const id = req.params.id
-  console.log(id);
   // console.log(id);
   if (id == 'gallery') {
     const gallery = await Gallery.findOne({domain})
-    return res.render('gallery-page', {metadata, data:gallery})
+    const slider = gallery
+    return res.render('gallery-page', {metadata, data:gallery, slider:slider})
     
   }else if(id == '' || id == 'favicon.ico'){
     const homedata = await MainPage.findOne({domain})
     const slider = await Gallery.findOne({domain})
-    return res.render('index', {metadata: metadata,homedata, slider})
+    return res.render('index', {metadata: metadata,homedata:homedata, slider:slider})
 
   }else{
           const result = await MetaData.aggregate([
@@ -81,10 +81,10 @@ const otherpage = async (req,res)=>{
                 const metadata = await MetaData.findOne({domain})
                 const homedata = await MainPage.findOne({domain})
                 const slider = await Gallery.findOne({domain})
-                return res.render('404', {metadata: metadata,homedata, slider})
+                return res.render('404', {metadata,homedata, slider})
             }
             
-            const slider = await Gallery.findOne({domain})
+        const slider = await Gallery.findOne({domain})
             // console.log(response[0]);
         const payload = response[0].content
         res.render('dynamic-page', {data: payload, metadata, slider})
@@ -142,7 +142,7 @@ const subpage = async (req,res)=>{
         const payload = response[0].content
         const slider = await Gallery.findOne({domain})
 
-        return res.render('dynamic-page', {data: payload, metadata, slider})
+        return res.render('dynamic-page', {data: payload, metadata:metadata, slider:slider})
         // console.log('Found ID:', id);
       } else {
         console.log('No matching document found.');
