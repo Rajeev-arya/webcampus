@@ -1,9 +1,13 @@
-  <header class="d-flex flex-start align-items-center">
+  <header class="d-flex flex-start align-items-center py-4 m-0">
 
-    <div>
-      <h1><%= metadata?.collegename %></h1>
-      <h3><%= metadata?.collegedata?.tagline %></h3>
-    </div></header>
+    <div class="d-flex justify-content-between align-items-center" style="width: 100%">
+      <% if (slider?.incharge) { %>
+          <img src="/images/official/<%=slider.collegeheader %>" alt="College Logo" class="college-name" />
+        <% } %>
+      
+      <img src="/assets/testing/amrit.png"class="d-none d-md-block" alt="College Logo">
+    </div>
+  </header>
 
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
@@ -12,7 +16,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse sm-color" id="navbarSupportedContent">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <% if (metadata && metadata.navigationbar && metadata.navigationbar.length > 0) { %>
                 <% metadata.navigationbar.forEach((item) => { 
                       if(item.itemtype && item.itemtype == 'dropdown'){ %>

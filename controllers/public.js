@@ -135,16 +135,17 @@ const subpage = async (req,res)=>{
             const homedata = await MainPage.findOne({domain})
             return res.render('404', {metadata: metadata,homedata, slider})
         }
+        // console.log(response);
         const payload = response[0].content
 
         return res.render('dynamic-page', {data: payload, metadata:metadata, slider:slider})
         // console.log('Found ID:', id);
       } else {
-        console.log('No matching document found.');
+        console.log('No matching document found 1.');
       }
-    } else {
-      console.log('No matching document found.');
-    }
+    } //  else {
+    //   // console.log('No matching document found 2.');
+    // }
   } catch (err) {
     console.error(err);
   }

@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.owl-nav {
+  display: none;
+}
+
+.owl-dots {
+  padding-top: 8px;
+}
+
+.notice-link {
+  height: 320px;
+  background-color: aliceblue;
+}
+.notice-link .heading {
+  padding: 8px 16px;
+  color: #fff;
+}
+.notice-link .heading h3 {
+  margin-bottom: 0;
+}
+.notice-link .body ul {
+  padding-top: 8px;
+}
+.notice-link .body ul li {
+  padding: 8px;
+}
+
+.about-college, .important-link {
+  background-color: aliceblue;
+}
+.about-college .heading, .important-link .heading {
+  padding: 8px 16px;
+  color: #fff;
+}
+.about-college .heading h3, .important-link .heading h3 {
+  margin-bottom: 0;
+}
+.about-college .body, .important-link .body {
+  padding: 12px;
+}/*# sourceMappingURL=style.css.map */

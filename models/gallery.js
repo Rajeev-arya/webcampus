@@ -36,6 +36,9 @@ const gallerySchema = new mongoose.Schema({
     },
     logo:{
         type:String
+    },
+    collegeheader:{
+        type:String
     }
 
 

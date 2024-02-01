@@ -180,13 +180,35 @@ const uploadSecretary = async (req,res)=>{
 
 const uploadIncharge = async (req,res)=>{
 
+  const domain = req.session.metadata.domain
+  const imagename = req.image.principal
+  const updatePrincipal = async (newPrincipalValue) => {
+      try {
+        const result = await Gallery.updateOne(
+          { domain}, // Replace with the actual domain value
+          { $set: { incharge: newPrincipalValue } }
+        );
+    
+        console.log(result);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    updatePrincipal(imagename);
+
+    res.redirect('/manager/upload-image')
+}
+
+const uploadcollegeheader = async (req,res)=>{
+
     const domain = req.session.metadata.domain
     const imagename = req.image.principal
     const updatePrincipal = async (newPrincipalValue) => {
         try {
           const result = await Gallery.updateOne(
             { domain}, // Replace with the actual domain value
-            { $set: { incharge: newPrincipalValue } }
+            { $set: { collegeheader: newPrincipalValue } }
           );
       
           console.log(result);
@@ -236,6 +258,7 @@ module.exports = {
     uploadSecretary,
     uploadIncharge,
     uploadLogo,
+    uploadcollegeheader,
     uploadNotice,
     uploadNews
 }

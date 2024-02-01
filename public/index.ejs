@@ -8,7 +8,7 @@
                 <div class="item">
                     <div class="image-box">
                         <div class="image">
-                        <img src="/images/gallery/<%=item.newimagename %>" style="max-height:600px"  alt="Slider">
+                        <img src="/images/gallery/1704879377732.jpg" style="max-height:600px"  alt="Slider">
                         </div>
                     </div>
                 </div>
@@ -30,11 +30,12 @@
     <div class="row mt-4">
         <div class="col-md-5 mb-3">
             <div class="notice-section">
-                <div class="header p-2">
-                    <h3 class="mb-0 p-1"><i class="fa fa-file-text-o px-3"></i>Notice & Updates</h3>
+                <div class="header">
+                    <h4 class="mb-0 p-1"><i class="fa fa-file-text-o ps-4 px-3"></i>Notice & Updates</h4>
                 </div>
                 <div class="body p-3">
                     
+                    <marquee width="60%" direction="up" height="292px">
                     <% if (homedata && homedata.notice && homedata.notice.content && homedata.notice.content.length > 0) { %>
                         <% homedata.notice.content.forEach(function(item) { %>
                             
@@ -52,27 +53,28 @@
                             </div>
                         <% }); %>
                     <% } %>
+                    </marquee>
                 </div>
             </div>
         </div>
         <div class="col-md-7 mb-3">
             <div class="important-link-section">
-                <div class="header p-2">
-                    <h3 class="mb-0 p-1"><i class="fa fa-database px-3"></i>Important Links</h3>
+                <div class="header">
+                    <h4 class="mb-0 p-1"><i class="fa fa-database px-3 ps-4"></i>Important Links</h4>
                 </div>
                 <div class="body">
 
-                    <div class="row">
+                    <div class="row px-2">
                         <% if (homedata && homedata.importantlink && homedata.importantlink.content && homedata.importantlink.content.length > 0) { %>
                             <% homedata.importantlink.content.forEach(function(item) { %>
-                                <div class="col-md-3 col-4 d-flex justify-content-center">
+                                <div class="col-md-2 col-4 d-flex justify-content-center">
                                     <center>
                                         <a href="<%= item.href %>" class="a-plain" style="text-decoration: none;">
                                             <div class="tab px-3 mx-2 mt-3">
                                                 <div class="icon p-1">
-                                                    <i class="fa <%= item.faicon %> fa-2x"></i>
+                                                    <i class="fa <%= item.faicon %>"></i>
                                                 </div>
-                                                <h6 class="text-center pb-2 pt-3"><%= item.heading %></h6>
+                                                <p class="text-center pb-2 pt-3"><%= item.heading %></p>
                                             </div>
                                         </a>
                                     </center>
@@ -127,7 +129,6 @@
 </div>
 
 <div class="container">
-
     <div class="row mt-4">
         <div class="col-md-7 mb-3">
             <div class="important-link-section">
@@ -145,24 +146,27 @@
                     <h3 class="mb-0 p-1"><i class="fa fa-calendar px-3"></i>New & Events</h3>
                 </div>
                 <div class="body p-3">
-                    
-                    <% if (homedata && homedata.news && homedata.news.content && homedata.news.content.length > 0) { %>
-                        <% homedata.news.content.forEach(function(item) { %>
+                    <marquee width="60%" direction="up" height="292px">
                             
-                            <div class="notice-content d-flex flex-start p-1">
-                                <div class="date px-3 py-2">
-                                    <h4 class="mb-0 pt-1">05</h4>
-                                    <h6 class="mb-0">JUN</h6>
-                                </div>
-                                <div class="content px-3">
-                                    <div>
-                                        <p class="mb-0"><%= item.caption %></p>
-                                        <a href="/images/news/<%= item.filepath %>" download="" class="btn btn-sm btn-info btn-round">Download</a>
+                        <% if (homedata && homedata.news && homedata.news.content && homedata.news.content.length > 0) { %>
+                            <% homedata.news.content.forEach(function(item) { %>
+                                
+                                <div class="notice-content d-flex flex-start p-1">
+                                    <div class="date px-3 py-2">
+                                        <h4 class="mb-0 pt-1">05</h4>
+                                        <h6 class="mb-0">JUN</h6>
+                                    </div>
+                                    <div class="content px-3">
+                                        <div>
+                                            <p class="mb-0"><%= item.caption %></p>
+                                            <a href="/images/news/<%= item.filepath %>" download="" class="btn btn-sm btn-info btn-round">Download</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <% }); %>
-                    <% } %>
+                            <% }); %>
+                        <% } %>
+                    </marquee>
+                    
                 </div>
             </div>
         </div>

@@ -183,6 +183,27 @@
                               </div>
                             </div>
                           </div>
+                          <div class="col-md-2">
+                            <div class="card bg-dark">
+                              <% if (data?.incharge) { %>
+                                  <img class="card-img-top" src="/images/official/<%=data?.collegeheader %>" alt="Card image" width="100%">
+                              <% }else{ %>
+                                  <img class="card-img-top" src="/images/extras/user.jpg" alt="Card image" width="100%">
+                              <% } %>
+                              <div class="card-body">
+                                <h5 class="card-title text-white">Header Image</h5>
+                                <form action="/manager/upload-collegeheader" method="post" enctype="multipart/form-data">
+                                  <div class="mb-3">
+                                    
+                                    <input class="form-control" type="file" id="formFile" name="principal" accept="image/*" required/>
+                                    <div class="d-flex justify-content-center">
+                                      <button type="submit" class="btn btn-sm btn-primary mt-3">Upload</button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       
