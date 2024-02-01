@@ -1,11 +1,20 @@
 const multer = require('multer')
 const path = require('path');
+const dotenv = require('dotenv')
+dotenv.config()
+const SERVER = process.env.SERVER || 'DEV'
 
 
 // Multer setup for handling file uploads
 const sliderPath = multer.diskStorage({
   destination: function (req, file, cb) {
+    if (SERVER == 'PROD') {
+      cb(null, path.join(__dirname,'..', '..', 'images', 'static-images' ,'gallery'));
+    } else {
+      cb(null, path.join(__dirname,'..','images','gallery'));
+    }
     // cb(null, path.join(__dirname,'..', '..', 'images', 'static-images' ,'gallery'));
+    // cb(null, path.join(__dirname,'..','images','gallery'));
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
@@ -22,7 +31,11 @@ const sliderPath = multer.diskStorage({
 // Multer setup for handling file uploads
 const principalPath = multer.diskStorage({
   destination: function (req, file, cb) {
-    // cb(null, path.join(__dirname,'..', '..', 'images', 'static-images' ,'official'));
+    if (SERVER == 'PROD') {
+      cb(null, path.join(__dirname,'..', '..', 'images', 'static-images' ,'official'));
+    } else {
+      cb(null, path.join(__dirname,'..','images','official'));
+    }
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
@@ -34,7 +47,12 @@ const principalPath = multer.diskStorage({
 // Multer setup for handling file uploads
 const noticePath = multer.diskStorage({
   destination: function (req, file, cb) {
-    // cb(null, path.join(__dirname,'..', '..', 'images', 'static-images'  ,'notices'));
+    if (SERVER == 'PROD') {
+      cb(null, path.join(__dirname,'..', '..', 'images', 'static-images'  ,'notices'));
+    } else {
+      cb(null, path.join(__dirname,'..','images','notices'));
+    }
+    
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
@@ -45,7 +63,11 @@ const noticePath = multer.diskStorage({
 // Multer setup for handling file uploads
 const newsPath = multer.diskStorage({
   destination: function (req, file, cb) {
-    // cb(null, path.join(__dirname,'..', '..', 'images', 'static-images'  ,'news'));
+    if (SERVER == 'PROD') {
+      cb(null, path.join(__dirname,'..', '..', 'images', 'static-images'  ,'news'));
+    } else {
+      cb(null, path.join(__dirname,'..','images','news'));
+    }
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);

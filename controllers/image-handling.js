@@ -211,7 +211,7 @@ const uploadcollegeheader = async (req,res)=>{
             { $set: { collegeheader: newPrincipalValue } }
           );
       
-          console.log(result);
+          // console.log(result);
         } catch (error) {
           console.error(error);
         }
