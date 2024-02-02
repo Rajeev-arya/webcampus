@@ -1,10 +1,28 @@
-  <header class="d-flex flex-start align-items-center py-4 m-0">
+  <div class="header-link">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <% if (metadata.collegedata.email1 && metadata.collegedata.phone1) { %>
+            <span class="pe-2"><strong>Phone: </strong> +91 <%= metadata.collegedata.phone1 %></span>
+            <span><strong>Email:</strong><%= metadata.collegedata.email1 %></span>
+            <% } %>
+        </div>
 
+            <% if (metadata.headerlink && metadata.headerlink.length > 0) { %>
+        <div class="link-button">
+          <% metadata.headerlink.forEach((item) => { %>
+          <span><a href="<%= item.link %>" class="btn btn-rounded btn-sm btn-<%= item.color %>"><%= item.heading %></a></span>
+            <% }) %>
+        </div>
+          <% } %>
+      </div>
+    </div>
+  </div>
+  <header class="d-flex flex-start align-items-center py-4 m-0">
     <div class="d-flex justify-content-between align-items-center" style="width: 100%">
-      <% if (slider?.incharge) { %>
+      <% if (slider?.collegeheader) { %>
           <img src="/images/official/<%=slider.collegeheader %>" alt="College Logo" class="college-name" />
         <% } %>
-      
       <img src="/assets/testing/amrit.png"class="d-none d-md-block" alt="College Logo">
     </div>
   </header>

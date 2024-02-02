@@ -85,6 +85,11 @@ const metaDataSchema = new mongoose.Schema({
             ]
         }
     ],
+    headerlink: [{
+        color: String,
+        heading: String,
+        href: String
+        }]
 },
 {
     timestamps:true

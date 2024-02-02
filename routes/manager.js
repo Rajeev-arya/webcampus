@@ -1,6 +1,6 @@
 const express = require('express')
 const { managerEjsLayout } = require('../middlewares/default')
-const { managerDashboard, widgetPage,importantLinkPage, addImportantLink, navigationPage, addNavigationItem, addNavigationSubItem, mainPage, updateMainPageData, addNotice, deleteNavitem, deleteSubNavitem, footerPage, addFooterItem, addFooterSubItem, deleteFooteritem, deleteSubFooterItem, deleteImportantLink, notice, news, deleteNotice, deleteNews} = require('../controllers/manager')
+const { managerDashboard, widgetPage,importantLinkPage, addImportantLink, navigationPage, addNavigationItem, addNavigationSubItem, mainPage, updateMainPageData, addNotice, deleteNavitem, deleteSubNavitem, footerPage, addFooterItem, addFooterSubItem, deleteFooteritem, deleteSubFooterItem, deleteImportantLink, notice, news, deleteNotice, deleteNews, headerLinkPage, addHeaderLink, deleteHeaderLink} = require('../controllers/manager')
 const { managerLogout } = require('../controllers/login')
 const { imagetype, imageUpload, imageUploadPage, deleteimage, uploadPrincipal, uploadSecretary, uploadDirector, uploadIncharge, uploadLogo, uploadNotice, uploadNews, uploadcollegeheader } = require('../controllers/image-handling')
 const { sliderStorage, sliderMiddlerware, principalMiddleware, principalStorage, noticeMiddleware, noticeStorage, newsStorage, newsMiddleware } = require('../middlewares/image-handling')
@@ -19,6 +19,10 @@ app.get('/delete-notice/:id', deleteNotice)
 app.get('/add-news',news)
 app.get('/delete-news/:id',deleteNews)
 // app.route('/edit-link/:id').get(editLinkPage)
+
+// Header Link
+app.route('/add-headerlink').get(headerLinkPage).post(addHeaderLink)
+app.route('/delete-headerlink/:id').get(deleteHeaderLink)
 
 // Important Link
 app.route('/add-link').get(importantLinkPage).post(addImportantLink)
