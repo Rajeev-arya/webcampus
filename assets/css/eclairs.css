@@ -7,7 +7,56 @@
     --white: #fff;
     --black: #000;
   }
+
+.dropdown-menu{
+  background-color: var(--main-color);
+  padding: 0;
+  transition: 1s ease-in;
+  :last-child{
+    border-bottom: none !important;
+  }
+  li{
+    border-bottom: 1px solid var(--bg-light);
+    padding: 0 !important;
+   a{
+    
+  color: var(--white);
+  padding: 10px 16px;
+  }
+  }
   
+}
+
+  .gallery-page.nav-pills{
+    .nav-item{
+      .nav-link{
+        background-color: var(--bg-light);
+        border-radius: 24px;
+        padding-left: 20px;
+        padding-right: 20px;
+        color: var(--main-color);
+        border: 1px solid var(--main-color)
+      }
+      .nav-link.active{
+        color: var(--bg-light) !important;
+        background-color: var(--main-color) !important;
+      }
+    }
+  }
+
+  .page-heading{
+    border-bottom: 2px solid var(--main-color);
+    padding: 12px 0 0 0;
+    color: var(--text-dark);
+    margin-bottom: 36px;
+  }
+  
+  .gallery-page.card{
+    border-color: var(--bg-dark);
+    border-radius: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;
+  }
+
   header {
     background-color: var(--white);
     color: var(--text-dark);

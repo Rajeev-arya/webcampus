@@ -61,55 +61,42 @@
                     </div>
                     <div class="card-body">
                       <div class="row g-3">
-                        <div class="col-md-3 col-6">
+                        <div class="col-md-4 col-6">
                           <div class="d-flex align-items-center">
                             <div class="avatar">
                               <div class="avatar-initial bg-primary rounded shadow">
-                                <i class="mdi mdi-trending-up mdi-24px"></i>
+                                <i class="mdi mdi-alarm-bell mdi-24px"></i>
                               </div>
                             </div>
                             <div class="ms-3">
                               <div class="small mb-1">Total Notice</div>
-                              <h5 class="mb-0 text-center"></h5>
+                              <h5 class="mb-0 text-center"><%= notice.length %></h5>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3 col-6">
+                        <div class="col-md-4 col-6">
                           <div class="d-flex align-items-center">
                             <div class="avatar">
                               <div class="avatar-initial bg-success rounded shadow">
-                                <i class="mdi mdi-account-outline mdi-24px"></i>
+                                <i class="mdi mdi-monitor-dashboard mdi-24px"></i>
                               </div>
                             </div>
                             <div class="ms-3">
                               <div class="small mb-1">Total News</div>
-                              <h5 class="mb-0 text-center"></h5>
+                              <h5 class="mb-0 text-center"><%= news.length %></h5>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3 col-6">
+                        <div class="col-md-4 col-6">
                           <div class="d-flex align-items-center">
                             <div class="avatar">
                               <div class="avatar-initial bg-warning rounded shadow">
-                                <i class="mdi mdi-cellphone-link mdi-24px"></i>
+                                <i class="mdi mdi-monitor-shimmer mdi-24px"></i>
                               </div>
                             </div>
                             <div class="ms-3">
                               <div class="small mb-1">Important Link</div>
-                              <h5 class="mb-0 text-center"></h5>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                          <div class="d-flex align-items-center">
-                            <div class="avatar">
-                              <div class="avatar-initial bg-info rounded shadow">
-                                <i class="mdi mdi-currency-usd mdi-24px"></i>
-                              </div>
-                            </div>
-                            <div class="ms-3">
-                              <div class="small mb-1">Gallery Images</div>
-                              <h5 class="mb-0 text-center"></h5>
+                              <h5 class="mb-0 text-center"><%= importantlink.length %></h5>
                             </div>
                           </div>
                         </div>
@@ -138,6 +125,16 @@
                           </tr>
                         </thead>
                         <tbody>
+                          <% if(notice && notice.length > 0){ %>
+                          <% let sr = 0; notice.forEach(function(item){ sr++; %>
+
+                          <tr>
+                            <th><%= sr %></th>
+                            <th><%= item.caption %></th>
+                            <th><%= item.date %></th>
+                            <th><a href="/images/notice/<%= item.filepath %>  %>" class="btn btn-warning btn-sm">Click</a></th>
+                          </tr>
+                          <% })} %>
                         </tbody>
                       </table>
                     </div>
@@ -160,6 +157,18 @@
                             <th>Download</th>
                           </tr>
                         </thead>
+                        <tbody>
+                          <% if(news && news.length > 0){ %>
+                          <% let sr = 0; news.forEach(function(item){ sr++; %>
+
+                          <tr>
+                            <th><%= sr %></th>
+                            <th><%= item.caption %></th>
+                            <th><%= item.date %></th>
+                            <th><a href="/images/news/<%= item.filepath %>  %>" class="btn btn-warning btn-sm" download>Click</a></th>
+                          </tr>
+                          <% })} %>
+                        </tbody>
                         <tbody>
                         </tbody>
                       </table>

@@ -8,7 +8,7 @@
                 <div class="item">
                     <div class="image-box">
                         <div class="image">
-                        <img src="/images/gallery/1704879377732.jpg" style="max-height:600px"  alt="Slider">
+                        <img src="/images/gallery/<%=item.newimagename %>" style="max-height:600px"  alt="Slider">
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="body p-3">
                     
-                    <marquee width="60%" direction="up" height="292px">
+                    <marquee width="60%" direction="up" height="292px" id="myMarquee">
                     <% if (homedata && homedata.notice && homedata.notice.content && homedata.notice.content.length > 0) { %>
                         <% homedata.notice.content.forEach(function(item) { %>
                             
@@ -146,7 +146,7 @@
                     <h3 class="mb-0 p-1"><i class="fa fa-calendar px-3"></i>New & Events</h3>
                 </div>
                 <div class="body p-3">
-                    <marquee width="60%" direction="up" height="292px">
+                    <marquee width="60%" direction="up" height="292px" id="myMarquee">
                             
                         <% if (homedata && homedata.news && homedata.news.content && homedata.news.content.length > 0) { %>
                             <% homedata.news.content.forEach(function(item) { %>
@@ -244,8 +244,6 @@
       <div class="my-4 py-3">
         <h2 class="mb-4"><i class="fa fa-image pe-2"></i> Our College Gallery</h2>
         <div class="row">
-            
-
             <% let gallery = slider?.image
                 let inc = 1
              if (gallery  && gallery.length > 0) { %>
@@ -253,7 +251,7 @@
                     <% if (inc < 5) { %>
                   <% if (item.foldername == 'mainpage') { %>
               <div class="col-md-3 mt-3">
-                <div class="card p-3">
+                <div class="card p-2">
                   <img src="/images/gallery/<%=item.newimagename %>" alt="Slider">
                   
                 </div>
@@ -263,20 +261,41 @@
                   <% } %>
                 <% }); %>
                 <% } %>
-
         </div>
       </div>
   </div>
 
 
+  <script>
+    // Get the marquee element
+    const marquee = document.getElementById('myMarquee');
+  
+    // Add event listeners for hover
+    marquee.addEventListener('mouseover', stopMarquee);
+    marquee.addEventListener('mouseout', startMarquee);
+  
+    // JavaScript functions to stop and start the marquee
+    function stopMarquee() {
+      marquee.stop();
+    }
+  
+    function startMarquee() {
+      marquee.start();
+    }
+  </script>
+
+    <script>
+        let navbar = document.querySelector('.nav-click');
+        let nav_link = document.querySelector('.nav-section');
+        navbar.onclick = function () {
+            nav_link.classList.toggle('active');
+            console.log("button clicked");
+        }
+    </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" ></script>
+  <script src="/assets/js/owl-plugin.js"></script>
 
 
 
-
-
-<!-- 
-<%= metadata %>
-    <br>
-    <br>
-    <br>
-    <%= homedata %> -->

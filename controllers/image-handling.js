@@ -1,264 +1,283 @@
 const Gallery = require("../models/gallery");
 const MainPage = require("../models/home_page");
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
+const fs = require("fs/promises");
 
-const imageUploadPage = async(req,res)=>{
-    const domain = req.session.metadata.domain
-    const response = await Gallery.findOne({domain})
+const imageUploadPage = async (req, res) => {
+  const domain = req.session.metadata.domain;
+  const response = await Gallery.findOne({ domain });
 
+  res.render("manager/widgets/image-upload", { data: response });
+};
 
-    res.render('manager/widgets/image-upload', {data: response})
-}
+const imageUpload = async (req, res) => {
+  const domain = req.session.metadata.domain;
+  let payload = req.image;
+  payload = {
+    _id: new mongoose.Types.ObjectId(),
+    newimagename: payload.newimagename,
+    foldername: req.body.foldername,
+  };
 
-const imageUpload = async(req, res)=>{
-    
-    const domain = req.session.metadata.domain
-    let payload = req.image
-    payload = {
-      
-      _id: new mongoose.Types.ObjectId(),
-        newimagename: payload.newimagename,
-        foldername: req.body.foldername
+  const response = await Gallery.findOneAndUpdate(
+    { domain: domain },
+    { $push: { image: payload } },
+    { new: true }
+  );
+  console.log(req.image);
+  res.redirect("/manager/upload-image");
+};
 
-    }
+const uploaddocuments = async (req, res) => {
+  console.log("Upload document not working");
+  // const domain = req.session.metadata.domain;
+  // let payload = req.image;
+  // payload = {
+  //   _id: new mongoose.Types.ObjectId(),
+  //   newimagename: payload.newimagename,
+  //   foldername: req.body.foldername,
+  // };
 
+  // const response = await Gallery.findOneAndUpdate(
+  //   { domain: domain },
+  //   { $push: { image: payload } },
+  //   { new: true }
+  // );
+  // console.log(req.image);
+  console.log(req.file.path);
+  res.redirect("/manager");
+};
 
-    const response = await Gallery.findOneAndUpdate(
-        { domain: domain },
-        { $push: { 'image': payload } },
-        { new: true }
+const imagetype = async (req, res) => {
+  const domain = req.session.metadata.domain;
+  const payload = {
+    _id: new mongoose.Types.ObjectId(),
+    name: req.body.imagename,
+    path: req.body.imagepath,
+  };
+
+  const response = await Gallery.findOneAndUpdate(
+    { domain },
+    { $push: { foldertype: payload } },
+    { new: true }
+  );
+
+  res.redirect("/manager/upload-image");
+};
+
+const deleteimage = async (req, res) => {
+  let path = "images/gallery/";
+
+  const domain = req.session.metadata.domain;
+  const result = await Gallery.findOne(
+    { domain, "image._id": req.params.id },
+    { "image.$": 1 } // Projection to only retrieve the matched image
+  );
+
+  path = path + result.image[0].newimagename;
+
+  const fileExists = await fs
+    .access(path)
+    .then(() => true)
+    .catch(() => false);
+
+  if (fileExists) {
+    await fs.unlink(path);
+  }
+
+  // Mongoose method to delete an image by ID
+  const deleteImageById = async (imageId) => {
+    try {
+      const result = await Gallery.updateOne(
+        { "image._id": imageId },
+        { $pull: { image: { _id: imageId } } }
       );
-    console.log(req.image);
-    res.redirect('/manager/upload-image')
-    
-}
 
-const imagetype = async(req,res)=>{
-    const domain = req.session.metadata.domain
-    const payload = {
-      
-      _id: new mongoose.Types.ObjectId(),
-        name: req.body.imagename,
-        path: req.body.imagepath
+      console.log(result);
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    const response = await Gallery.findOneAndUpdate({domain},
-            { $push: { 'foldertype': payload } },
-            { new: true }
-        )
-        
-    res.redirect('/manager/upload-image')
-}
+  const idtodelete = req.params.id;
 
-const deleteimage = async (req,res)=>{
+  deleteImageById(idtodelete);
 
+  res.redirect("/manager/upload-image");
+};
 
-    // Mongoose method to delete an image by ID
-    const deleteImageById = async (imageId) => {
-        try {
-        const result = await Gallery.updateOne(
-            { 'image._id': imageId },
-            { $pull: { 'image': { _id: imageId } } }
-        );
-    
-        console.log(result);
-        } catch (error) {
-        console.error(error);
-        }
-    };
-
-    const idtodelete = req.params.id
-
-    deleteImageById(idtodelete)
-
-    res.redirect('/manager/upload-image')
-}
-
-const uploadPrincipal = async (req,res)=>{
-
-  const domain = req.session.metadata.domain
-  const imagename = req.image.principal
+const uploadPrincipal = async (req, res) => {
+  const domain = req.session.metadata.domain;
+  const imagename = req.image.principal;
   const updatePrincipal = async (newPrincipalValue) => {
-      try {
-        const result = await Gallery.updateOne(
-          { domain}, // Replace with the actual domain value
-          { $set: { principal: newPrincipalValue } }
-        );
-    
-        console.log(result);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    try {
+      const result = await Gallery.updateOne(
+        { domain }, // Replace with the actual domain value
+        { $set: { principal: newPrincipalValue } }
+      );
 
-    updatePrincipal(imagename);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    res.redirect('/manager/upload-image')
-}
+  updatePrincipal(imagename);
 
+  res.redirect("/manager/upload-image");
+};
 
-const uploadNotice = async (req,res)=>{
-
-  const domain = req.session.metadata.domain
+const uploadNotice = async (req, res) => {
+  const domain = req.session.metadata.domain;
 
   const payload = {
     caption: req.body.caption,
     filepath: req.image.notice,
-    date: req.body.date
-  }
+    date: req.body.date,
+  };
 
-      await MainPage.findOneAndUpdate(
-        { domain: domain },
-        { $push: { 'notice.content': payload } },
-        { new: true }
-    );
-    res.redirect('/manager/add-notice')
-  }
+  await MainPage.findOneAndUpdate(
+    { domain: domain },
+    { $push: { "notice.content": payload } },
+    { new: true }
+  );
+  res.redirect("/manager/add-notice");
+};
 
-  const uploadNews = async (req,res)=>{
+const uploadNews = async (req, res) => {
+  const domain = req.session.metadata.domain;
 
-    const domain = req.session.metadata.domain
-  
-    const payload = {
-      caption: req.body.caption,
-      filepath: req.image.notice,
-      date: req.body.date
-    }
-  
-        await MainPage.findOneAndUpdate(
-          { domain: domain },
-          { $push: { 'news.content': payload } },
-          { new: true }
-      );
-      res.redirect('/manager/add-news')
-    }
-  
+  const payload = {
+    caption: req.body.caption,
+    filepath: req.image.notice,
+    date: req.body.date,
+  };
 
-const uploadDirector = async (req,res)=>{
+  await MainPage.findOneAndUpdate(
+    { domain: domain },
+    { $push: { "news.content": payload } },
+    { new: true }
+  );
+  res.redirect("/manager/add-news");
+};
 
-    const domain = req.session.metadata.domain
-    const imagename = req.image.principal
-    const updatePrincipal = async (newPrincipalValue) => {
-        try {
-          const result = await Gallery.updateOne(
-            { domain}, // Replace with the actual domain value
-            { $set: { director: newPrincipalValue } }
-          );
-      
-          console.log(result);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-
-      updatePrincipal(imagename);
-
-      res.redirect('/manager/upload-image')
-}
-
-const uploadSecretary = async (req,res)=>{
-
-    const domain = req.session.metadata.domain
-    const imagename = req.image.principal
-    const updatePrincipal = async (newPrincipalValue) => {
-        try {
-          const result = await Gallery.updateOne(
-            { domain}, // Replace with the actual domain value
-            { $set: { secretary: newPrincipalValue } }
-          );
-      
-          console.log(result);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-
-      updatePrincipal(imagename);
-
-      res.redirect('/manager/upload-image')
-}
-
-const uploadIncharge = async (req,res)=>{
-
-  const domain = req.session.metadata.domain
-  const imagename = req.image.principal
+const uploadDirector = async (req, res) => {
+  const domain = req.session.metadata.domain;
+  const imagename = req.image.principal;
   const updatePrincipal = async (newPrincipalValue) => {
-      try {
-        const result = await Gallery.updateOne(
-          { domain}, // Replace with the actual domain value
-          { $set: { incharge: newPrincipalValue } }
-        );
-    
-        console.log(result);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    try {
+      const result = await Gallery.updateOne(
+        { domain }, // Replace with the actual domain value
+        { $set: { director: newPrincipalValue } }
+      );
 
-    updatePrincipal(imagename);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    res.redirect('/manager/upload-image')
-}
+  updatePrincipal(imagename);
 
-const uploadcollegeheader = async (req,res)=>{
+  res.redirect("/manager/upload-image");
+};
 
-    const domain = req.session.metadata.domain
-    const imagename = req.image.principal
-    const updatePrincipal = async (newPrincipalValue) => {
-        try {
-          const result = await Gallery.updateOne(
-            { domain}, // Replace with the actual domain value
-            { $set: { collegeheader: newPrincipalValue } }
-          );
-      
-          // console.log(result);
-        } catch (error) {
-          console.error(error);
-        }
-      };
+const uploadSecretary = async (req, res) => {
+  const domain = req.session.metadata.domain;
+  const imagename = req.image.principal;
+  const updatePrincipal = async (newPrincipalValue) => {
+    try {
+      const result = await Gallery.updateOne(
+        { domain }, // Replace with the actual domain value
+        { $set: { secretary: newPrincipalValue } }
+      );
 
-      updatePrincipal(imagename);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-      res.redirect('/manager/upload-image')
-}
+  updatePrincipal(imagename);
 
-const uploadLogo = async (req,res)=>{
+  res.redirect("/manager/upload-image");
+};
 
-    const domain = req.session.metadata.domain
-    const imagename = req.image.principal
-    const updatePrincipal = async (newPrincipalValue) => {
-        try {
-          const result = await Gallery.updateOne(
-            { domain}, // Replace with the actual domain value
-            { $set: { logo: newPrincipalValue } }
-          );
-      
-          console.log(result);
-        } catch (error) {
-          console.error(error);
-        }
-      };
+const uploadIncharge = async (req, res) => {
+  const domain = req.session.metadata.domain;
+  const imagename = req.image.principal;
+  const updatePrincipal = async (newPrincipalValue) => {
+    try {
+      const result = await Gallery.updateOne(
+        { domain }, // Replace with the actual domain value
+        { $set: { incharge: newPrincipalValue } }
+      );
 
-      updatePrincipal(imagename);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-      res.redirect('/manager/upload-image')
-}
+  updatePrincipal(imagename);
 
+  res.redirect("/manager/upload-image");
+};
 
+const uploadcollegeheader = async (req, res) => {
+  const domain = req.session.metadata.domain;
+  const imagename = req.image.principal;
+  const updatePrincipal = async (newPrincipalValue) => {
+    try {
+      const result = await Gallery.updateOne(
+        { domain }, // Replace with the actual domain value
+        { $set: { collegeheader: newPrincipalValue } }
+      );
 
+      // console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  updatePrincipal(imagename);
+
+  res.redirect("/manager/upload-image");
+};
+
+const uploadLogo = async (req, res) => {
+  const domain = req.session.metadata.domain;
+  const imagename = req.image.principal;
+  const updatePrincipal = async (newPrincipalValue) => {
+    try {
+      const result = await Gallery.updateOne(
+        { domain }, // Replace with the actual domain value
+        { $set: { logo: newPrincipalValue } }
+      );
+
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  updatePrincipal(imagename);
+
+  res.redirect("/manager/upload-image");
+};
 
 module.exports = {
-    imageUploadPage, 
-    imageUpload, 
-    imagetype, 
-    deleteimage,
-    uploadPrincipal,
-    uploadDirector,
-    uploadSecretary,
-    uploadIncharge,
-    uploadLogo,
-    uploadcollegeheader,
-    uploadNotice,
-    uploadNews
-}
+  imageUploadPage,
+  imageUpload,
+  imagetype,
+  deleteimage,
+  uploadPrincipal,
+  uploadDirector,
+  uploadSecretary,
+  uploadIncharge,
+  uploadLogo,
+  uploadcollegeheader,
+  uploadNotice,
+  uploadNews,
+  uploaddocuments,
+};
