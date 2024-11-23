@@ -102,7 +102,7 @@ const sessionManager = (app, key)=>{
         resave: false,
         saveUninitialized: true,
         store: MongoStore.create({ mongoUrl: MONGO_PATH }),
-        cookie: { secure: false }, // Adjust this based on your environment
+        cookie: { secure: true }, // Adjust this based on your environment
     }))
 }
 

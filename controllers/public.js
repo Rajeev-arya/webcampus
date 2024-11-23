@@ -13,7 +13,9 @@ const SERVER = process.env.SERVER;
 // const domain = TEST_DOMAIN
 
 const mainpage = async (req, res) => {
-  const domain = hostname(SERVER, TEST_DOMAIN, req);
+  // const domain = hostname(SERVER, TEST_DOMAIN, req);
+
+  const domain = 'spvermacollege.in'
 
   if (domain == IP) {
     return res.render("webcampus", { layout: false });
